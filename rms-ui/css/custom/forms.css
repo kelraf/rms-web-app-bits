@@ -1,0 +1,57 @@
+.register {
+    /* background-color: red !important; */
+    width: 50%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: 1px solid white;
+    padding: 5px;
+    text-align: center;
+    color: white;
+}
+
+.register input {
+    text-align: center;
+}
+
+
+/* .register input[type=select] option {
+    text-align: center;
+} */
+
+.btn-custom {
+    background: transparent;
+    border: 1px solid white;
+    transition-duration: 1s;
+}
+
+.btn-custom:hover {
+    border: 1px solid white;
+    border-radius: 10px;
+    background: transparent;
+}
+
+.btn-50 {
+    width: 50%;
+    border-radius: 0;
+}
+
+
+/* add house file */
+
+.align-tabs {
+    /* background: rebeccapurple; */
+    width: 50%;
+    margin: auto;
+    margin-top: 10px;
+    border: 1px solid white;
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.align-tabs a {
+    color: white;
+    border: 0 !important;
+    border-radius: 0 !important;
+    flex: 1 !important;
+}
