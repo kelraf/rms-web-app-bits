@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 bg-primary">
-                <form action="" method="post" class="register">
+                <form action="../../rms-api/api/users-api/register.php" method="post" class="register">
 
                     <div class="reg-header">
                         <h4>Register</h4>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="form-check form-check-inline pt-2 pb-2">
-                        <input type="radio" class="form-check-input" value="male" name="gender">
+                        <input type="radio" class="form-check-input" value="male" name="gender" checked>
                         <label for="male" class="form-check-label">Male</label>
                     </div>
 
@@ -48,7 +48,7 @@
 
                     <div class="form-group">
                         <label for="phoneNumber">Phone Number</label>
-                        <input type="number" class="form-control" placeholder="Enter Your Phone Number" name="phoneNumber">
+                        <input type="number" class="form-control" placeholder="Enter Your Phone Number" name="phoneNo">
                     </div>
 
                     <div class="form-group">
@@ -62,8 +62,8 @@
                     </div>
 
                     <div class="form-group">
-                        <!-- <button type="submit" class="btn btn-primary btn-custom btn-50">Register</button> -->
-                        <a class="btn btn-primary btn-custom btn-50 text-white" href="./dashboard.html">Register</a>
+                        <button type="submit" class="btn btn-primary btn-custom btn-50">Register</button>
+                        <!-- <a class="btn btn-primary btn-custom btn-50 text-white" href="./dashboard.php">Register</a> -->
                     </div>
 
                 </form>

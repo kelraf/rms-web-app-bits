@@ -34,7 +34,7 @@
 
                     <div class="form-group">
                         <!-- <button type="submit" class="btn btn-primary btn-custom btn-50">Login</button> -->
-                        <a class="btn btn-primary btn-custom btn-50 text-white" href="./dashboard.html">Login</a>
+                        <a class="btn btn-primary btn-custom btn-50 text-white" href="./dashboard.php">Login</a>
                     </div>
 
                 </form>
