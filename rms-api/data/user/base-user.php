@@ -15,6 +15,8 @@
         public $registrationDate;
         public $status;
         public $exitDate;
+        public $passw;
+        public $confirmPassw;
 
         public $admin;
         public $landLord;
@@ -32,15 +34,45 @@
             $this->db = $this->dbinst->closeConn();
         }
 
-        protected function idExists() {}
+        protected function idExists($data=false) {
+            if(empty($this->id)) {
+                return ["bool" => false, "message" => "Please Provide the user Id"];
+            } else {
+                try {
 
-        protected function vEmail() {}
+                    $stmt = "SELECT * FROM users WHERE id=?";
+                    $sql = $this->db->prepare($stmt);
+                    $sql->execute([$this->id]);
+                    $user = $sql->fetch();
+
+                    if(!$user) {
+                        return ["bool" => false, "message" => "No User With Such Id"];
+                    } else {
+                        if($data) {
+                            return ["bool" => true, "user" => $user];
+                        } else {
+                            return ["bool" => true];
+                        }
+                    }
+
+                } catch(PDOExeption $ex) {
+                    echo "Error: {$ex->getMessage()}";
+                }
+            }
+        }
+
+        protected function vEmail($checkExists=false) {}
+        
+        protected function vPassword($checkExists=false) {}
 
         protected function vNames() {}
 
         protected function vUserInfor() {}
-    }
+    } 
 
     // $base = new Base;
+
+    // $base->id = 2;
+    // print_r($base->idExists());
 
 ?>

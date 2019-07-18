@@ -47,9 +47,11 @@
                 nationalId INT(15),
                 phoneNo VARCHAR(15),
                 email VARCHAR(20),
-                registrationData VARCHAR(15) NOT NULL,
+                registrationData VARCHAR(15),
                 status TEXT(10),
                 exitDate VARCHAR(15),
+                passw VARCHAR(50) NOT NULL,
+                confirmPassw VARCHAR(50) NOT NULL,
                 admin BOOLEAN,
                 landlord BOOLEAN,
                 tenant BOOLEAN
@@ -80,11 +82,14 @@
             $this->connection->exec($apartments);
             $this->connection->exec($houses);
 
+            echo "Successfully Created The Tables";
+
         }
     }
 
-    $db = new Database;
+    // $db = new Database;
     // $db->getConn();
     // $db->closeConn();
+    // $db->createTables();
 
 ?>
