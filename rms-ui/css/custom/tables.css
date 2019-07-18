@@ -1,0 +1,61 @@
+body {
+    /* background: white !important; */
+}
+
+#users {
+    /* background: transparent !important;
+    color: white !important; */
+}
+
+.table-body {
+    /* /* background: red; */
+    /* color: rgb(255, 255, 255) !important; */ 
+}
+
+#table-btn {
+    width: 100% !important;
+    height: 100% !important;
+    background: transparent;
+    border-radius: 0;
+    color: white;
+    border: 1px solid white;
+    opacity: 0;
+    transition-duration: 0.3s;
+}
+
+#table-row:hover #table-btn {
+    opacity: 1;
+}
+
+#table-row {
+    color: white;
+    background: transparent;
+    padding-top: 4px !important;
+}
+
+#table-row:hover{
+    color: rgb(199, 196, 196);
+}
+
+#table-row:hover {
+    /* background: rgb(126, 126, 126) !important; */
+    /* cursor: pointer; */
+} 
+
+
+
+.back-arrow-btn {
+    /* background: red; */
+    position: relative;
+    display: inline-block;
+    width: 50px !important;
+    height: 50px !important;
+    top: 5px;
+    left: 5px;
+    padding-top: 9px;
+    padding-left: 9px;
+    text-decoration: none;
+    color: white;
+    border-radius: 50%;
+    border: 1px solid white;
+}
