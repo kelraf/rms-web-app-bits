@@ -28,6 +28,14 @@
         } 
 
         public function getUsers($getOne=false) {
+
+            /* 
+                This method creates gets User/s depending on the value of the getOne variable
+                If true returns a user with a given id
+                if false returns all the Users form the users table.
+                if No id is provided and the value of getOne is true
+                Then the method returns a an assos array with a boolean of false and a message 
+            */
             
             if($getOne) {
                 $done = $this->idExists(true);
@@ -95,7 +103,7 @@
     $user->passw = "kelraf11776";
     $user->confirmPassw = "kelraf11776";
     // print_r($user->register());
-    // print_r($user->getUsers(true));
-    print_r($user->updateInfor());
+    print_r($user->getUsers(true));
+    // print_r($user->updateInfor());
 
 ?>
