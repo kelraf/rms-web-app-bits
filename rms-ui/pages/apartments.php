@@ -19,7 +19,7 @@
 <body class="bg-primary text-white">
 
     <!-- Back Button -->
-    <a href="./dashboard.html" class="back-arrow-btn">
+    <a href="./dashboard.php" class="back-arrow-btn">
         <i class="fa fa-arrow-left fa-2x"></i>
     </a>
 
@@ -50,7 +50,30 @@
 
                     <tbody class="bg-primary" id="table-body">
 
-                        <tr id="table-row" class="table-row pt-3">
+                        <?php 
+                        
+                            include "../../rms-api/database.php";
+
+                            $results = mysqli_query($conn, "SELECT * FROM apartments");
+                            
+                            while($data = mysqli_fetch_array($results)) {
+                                echo '
+                                <tr id="table-row" class="table-row pt-3">
+                                    <td>'.$data["apartmentName"].'</td>
+                                    <td>'.$data["apartmentLocation"].'</td>
+                                    <td>'.$data["numberHouses"].'</td>
+                                    <td>'.$data["emptyHouses"].'</td>
+                                    <td>'.$data["occupiedHouses"].'</td>
+                                    <td class="p-0">
+                                        <a href="./apartment_profile.php" class="btn mt-1 mb-1" id="table-btn">More</a>
+                                    </td>
+                                </tr>
+                                ';
+                            }
+                        
+                        ?>
+
+                        <!-- <tr id="table-row" class="table-row pt-3">
                             <td>Rafael </td>
                             <td>Kingara</td>
                             <td>Male</td>
@@ -89,7 +112,7 @@
                             <td class="p-0">
                                 <a href="./apartment_profile.html" class="btn mt-1 mb-1" id="table-btn">More</a>
                             </td>
-                        </tr>
+                        </tr> -->
 
                     </tbody>
                 </table>

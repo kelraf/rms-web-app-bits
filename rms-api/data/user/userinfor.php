@@ -10,19 +10,39 @@
 
         public function register() {
 
-            try {
+            /**
+             * These Method id used to register a user to the system
+             * it receives email password and confirm password as its parameters
+             * returns and assoc array with true and a success message if successfull or false and error message if unsuccessfull
+             * Dependacy methods
+             *  -vEmail() with a true parameter to check if an email exists in the database
+             *  -vPassword() with and optional false to tell the method not to verify against a stored password in the db which will require user id
+             */
 
-                $stmt = "INSERT INTO users(email, passw, confirmPassw) VALUES(?, ?, ?)";
-                $sql = $this->db->prepare($stmt);
+            $vmail = $this->vEmail(true);
+            $vpassw = $this->vPassword();
 
-                if($sql->execute([$this->email, $this->passw, $this->confirmPassw])) {
-                    return ["bool" => true, "message" => "Successfully Registered"];
-                } else {
-                    throw new Exception("Error Occurred During Registration");  
+            if(!$vmail["bool"]) {
+                return $vmail;
+            } elseif(!$vpassw["bool"]) {
+                return $vpassw;
+            } else {
+
+                try {
+
+                    $stmt = "INSERT INTO users(email, passw, confirmPassw) VALUES(?, ?, ?)";
+                    $sql = $this->db->prepare($stmt);
+    
+                    if($sql->execute([$this->email, $this->passw, $this->confirmPassw])) {
+                        return ["bool" => true, "message" => "Successfully Registered"];
+                    } else {
+                        throw new Exception("Error Occurred During Registration");  
+                    }
+    
+                } catch(PDOExeption $ex) {
+                    echo "Error: {$ex->getMessage()}";
                 }
 
-            } catch(PDOExeption $ex) {
-                echo "Error: {$ex->getMessage()}";
             }
 
         } 
@@ -48,19 +68,12 @@
 
             } else {
 
-                try {
-                    $stmt = "SELECT * FROM users";
-                    $sql = $this->db->query($stmt);
-                    $data = $sql->fetchAll();
-
-                    if($data) {
-                        return ["bool" => true, "data" => $data];
-                    } else {
-                        return ["bool" => false, "message" => "Users Table Is empty"];
-                    }
-                } catch(PDOExeption $ex) {
-                    echo "Error: {$ex->getMessage()}";
-                }
+               $done = $this->getAll();
+               if($done["bool"]) {
+                    return $done;
+               } else {
+                   return $done;
+               }
 
             }
 
@@ -85,7 +98,21 @@
             }
         }
 
-        public function updatePasswords() {}
+        public function updatePasswords() {
+            /* 
+                *This method is userd to update user passwords
+                *It receives current, new and confirmed passwords and the user id to update.
+                *It returns and assoc array with a true and a success message if success or false and error message if unsuccessfull
+                *Dependant methods 
+                    -vPassword(true) The true parameter tells The method to verify against a stored password in the database. These Requires user id set.
+            */
+            $result = $this->vPassword(true);
+            if($result["bool"]) {
+                return ["bool" => true, "Message" => "Success"];
+            } else {
+                return $result;
+            }
+        }
 
         public function deleteUser() {}
 
@@ -93,17 +120,22 @@
 
     $user = new UserInfor;
 
-    $user->id = 1;
+    $user->id = 10;
+
+    $user->currentPassw = "kelvin";
+
     $user->firstName = "Kelvin";
     $user->lastName = "Wambugu";
     $user->gender = "male";
     $user->nationalId = 1122678;
     $user->phoneNo = "0727456354";
-    $user->email = "kelraf@gmail.com";
-    $user->passw = "kelraf11776";
-    $user->confirmPassw = "kelraf11776";
+    $user->email = "kelvin@gmail.com";
+    $user->passw = "kelvin";
+    $user->confirmPassw = "kelvin";
+
     // print_r($user->register());
-    print_r($user->getUsers(true));
+    // print_r($user->updatePasswords());
+    // print_r($user->getUsers());
     // print_r($user->updateInfor());
 
 ?>

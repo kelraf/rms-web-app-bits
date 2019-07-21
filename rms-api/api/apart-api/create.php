@@ -12,7 +12,8 @@
                         );
 
     if($done) {
-        echo "Success";
+        header("Location: ../../../rms-ui/pages/dashboard.php");
     } else {
         echo "Error";
+        header("Location: ../../../rms-ui/pages/apartment_form.php");
     }

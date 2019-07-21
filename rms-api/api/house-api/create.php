@@ -16,12 +16,10 @@
     );
 
     if ($done) {
-        echo "Success";
+        header("Location: ../../../rms-ui/pages/dashboard.php");
     } else {
-        echo "Error";
+        echo "Error".mysqli_error($conn);
+        // header("Location: ../../../rms-ui/pages/house_form.php");
     }
-
-    print_r($_POST);
-
 
 ?>
