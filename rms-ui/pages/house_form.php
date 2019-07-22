@@ -12,6 +12,8 @@
 
 <body class="bg-primary">
 
+<?php echo $_GET["apart_id"] ?>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">

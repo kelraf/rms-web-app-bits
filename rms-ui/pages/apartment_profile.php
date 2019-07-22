@@ -62,7 +62,16 @@
                 <div class="row pt-2 pb-2">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./house_form.php" class="btn">Add House</a>
+                            <a href="./house_form.php<?php echo "?apart_id=" . $data["id"] ?>" class="btn">Add House</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Apartments Details row -->
+                <div class="row pt-2 pb-2">
+                    <div class="col-12  p-0">
+                        <div class="edit-btn">
+                            <a href="./house_form.php<?php echo "?apart_id=" . $data["id"] ?>" class="btn">Edit</a>
                         </div>
                     </div>
                 </div>
@@ -71,16 +80,7 @@
                 <div class="row pt-2 pb-2">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./house_form.php" class="btn">Edit</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Edit User Details row -->
-                <div class="row pt-2 pb-2">
-                    <div class="col-12  p-0">
-                        <div class="edit-btn">
-                            <a href="./house_form.php" class="btn">Delete</a>
+                            <a href="./house_form.php<?php echo "?apart_id=" . $data["id"] ?>" class="btn">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -134,49 +134,49 @@
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Total Houses</div>
-                    <div class="col-7 pt-2 pb-2"><?php 
-                    if(empty($data["numberHouses"])) {
-                        echo "Not Available"; 
-                    } else {
-                        echo $data["numberHouses"];
-                    }
-                     ?></div>
+                    <div class="col-7 pt-2 pb-2"><?php
+                                                    if (empty($data["numberHouses"])) {
+                                                        echo "Not Available";
+                                                    } else {
+                                                        echo $data["numberHouses"];
+                                                    }
+                                                    ?></div>
                 </div>
 
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Occupied Houses</div>
                     <div class="col-7 pt-2 pb-2"><?php
-                        if (empty($data["numberHouses"])) {
-                            echo "Not Available";
-                        } else {
-                            echo $data["occupiedHouses"];
-                        }
-                    ?></div>
+                                                    if (empty($data["numberHouses"])) {
+                                                        echo "Not Available";
+                                                    } else {
+                                                        echo $data["occupiedHouses"];
+                                                    }
+                                                    ?></div>
                 </div>
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Unoccupied Houses</div>
                     <div class="col-7 pt-2 pb-2"><?php
 
-                        if (empty($data["numberHouses"])) {
-                            echo "Not Available";
-                        } else {
-                            echo $data["emptyHouses"];
-                        }
+                                                    if (empty($data["numberHouses"])) {
+                                                        echo "Not Available";
+                                                    } else {
+                                                        echo $data["emptyHouses"];
+                                                    }
 
-                    ?></div>
+                                                    ?></div>
                 </div>
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Overoll Rent</div>
                     <div class="col-7 pt-2 pb-2"><?php
-                        if (empty($data["numberHouses"])) {
-                            echo "Not Available";
-                        } else {
-                            echo $data["rentalTotal"];
-                        }
-                    ?></div>
+                                                    if (empty($data["numberHouses"])) {
+                                                        echo "Not Available";
+                                                    } else {
+                                                        echo $data["rentalTotal"];
+                                                    }
+                                                    ?></div>
                 </div>
 
                 <div class="row">
