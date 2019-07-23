@@ -9,11 +9,11 @@
         echo "Successfully Connected";
     }
 
-// require_once "../../database.php";
+    // require_once "../../database.php";
 
     $results = mysqli_query($conn, "SELECT * FROM houses");
     
-    $data = [];
+    $data = []; 
 
     while($row = mysqli_fetch_array($results)) {
 

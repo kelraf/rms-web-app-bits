@@ -71,7 +71,7 @@
                 <div class="row pt-2 pb-2">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./house_form.php<?php echo "?apart_id=" . $data["id"] ?>" class="btn">Edit</a>
+                            <a href="./apartment_form_update.php<?php echo "?apart_id=" . $data["id"] ?>" class="btn">Edit</a>
                         </div>
                     </div>
                 </div>

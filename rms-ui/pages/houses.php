@@ -49,7 +49,7 @@
 
                     <tbody class="bg-primary" id="table-body">
 
-                        <?php 
+                        <?php  
                         
                             require_once "../../rms-api/api/house-api/get-houses.php";
                             

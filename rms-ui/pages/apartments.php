@@ -50,7 +50,7 @@
 
                     <tbody class="bg-primary" id="table-body">
 
-                        <?php 
+                        <?php  
                         
                             include "../../rms-api/database.php";
 
@@ -65,7 +65,7 @@
                                     <td>'.$data["emptyHouses"].'</td>
                                     <td>'.$data["occupiedHouses"].'</td>
                                     <td class="p-0">
-                                        <a href="./apartment_profile.php?id='.$data["id"].'" class="btn mt-1 mb-1" id="table-btn">More</a>
+                                        <a href="./apartment_profile.php?id='.$data["id"].' class="btn mt-1 mb-1" id="table-btn">More</a>
                                     </td>
                                 </tr>
                                 ';
