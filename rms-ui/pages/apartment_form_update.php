@@ -12,6 +12,16 @@
 
 <body class="bg-primary">
 
+    <?php
+
+    $apart_id = $_GET['apart_id'];
+
+    include "../../rms-api/database.php";
+    $results = mysqli_query($conn, "SELECT apartmentName, apartmentLocation FROM apartments WHERE id='$apart_id'");
+    $apart = mysqli_fetch_array($results);
+
+    ?>
+
     <div class="container">
         <div class="row">
             <div class="col-12 bg-primary">
@@ -23,12 +33,12 @@
 
                     <div class="form-group  pt-2 pb-2">
                         <label for="apartmentName">Apartment Name</label>
-                        <input type="text" class="form-control" placeholder="Enter Apartment Name" value="Id: <?php echo $_GET["apart_id"] ?>" name="apartmentName">
+                        <input type="text" class="form-control" placeholder="Enter Apartment Name" value="<?php echo $apart["apartmentName"] ?>" name="apartmentName">
                     </div>
 
                     <div class="form-group pt-2 pb-2">
                         <label for="apartmentLocation">Apartment Location</label>
-                        <input type="text" class="form-control" name="apartmentLocation" placeholder="Enter Your Apartment Location">
+                        <input type="text" class="form-control" name="apartmentLocation" value="<?php echo $apart["apartmentLocation"] ?>" placeholder="Enter Your Apartment Location">
                     </div>
 
                     <div class="form-group">
