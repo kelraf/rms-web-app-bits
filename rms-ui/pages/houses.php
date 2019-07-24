@@ -63,7 +63,7 @@
                                     <td><span class="pr-1">Kshs</span><?php echo $row["rent"] ?></td>
                                     <!-- <td><?php echo $row["houseType"] ?></td> -->
                                     <td class="p-0">
-                                        <a href="./house_profile.php" class="btn mt-1 mb-1" id="table-btn">More</a>
+                                        <a href="./house_profile.php?house_id=<?php echo $row["id"] ?>" class="btn mt-1 mb-1" id="table-btn">More</a>
                                     </td>
 
                                <?php } ?>

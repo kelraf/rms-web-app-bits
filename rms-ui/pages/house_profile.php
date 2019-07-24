@@ -15,6 +15,29 @@
 
 <body class="bg-primary" style="background: blue;">
 
+    <?php
+
+    $house_id = $_GET["house_id"];
+    include "../../rms-api/database.php";
+    $query = mysqli_query($conn, "SELECT * FROM houses WHERE id='$house_id'");
+    $data = mysqli_fetch_array($query);
+    if ($data) {
+        if ($data["houseType"] != "BedSitter") {
+            $data["houseType"] = $data["houseType"] . " Bedroom/s";
+        }
+        $apart_id = $data["apartmentId"];
+        $query_one = mysqli_query($conn, "SELECT * FROM apartments WHERE id='$apart_id'");
+        $apart = mysqli_fetch_array($query_one);
+
+        if ($apart) {
+            echo "Success";
+        }
+    } else {
+        echo "No Data Available";
+    }
+
+    ?>
+
     <!-- Back Button -->
     <a href="./houses.php" class="back-arrow-btn">
         <i class="fa fa-arrow-left fa-2x"></i>
@@ -35,18 +58,13 @@
 
                 <!-- House Information -->
                 <div class="row">
-                    <div class="col-5 pt-2 pb-2">No Of BedRooms</div>
-                    <div class="col-7 pt-2 pb-2">3</div>
-                </div>
-
-                <div class="row">
                     <div class="col-5 pt-2 pb-2">House Type</div>
-                    <div class="col-7 pt-2 pb-2">House</div>
+                    <div class="col-7 pt-2 pb-2"><?php echo $data["houseType"] ?></div>
                 </div>
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Rent</div>
-                    <div class="col-7 pt-2 pb-2">Kshs 30000</div>
+                    <div class="col-7 pt-2 pb-2"><?php echo "Kshs " . $data["rent"] ?></div>
                 </div>
 
                 <div class="row">
@@ -55,24 +73,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-5 pt-2 pb-2">Occupied</div>
-                    <div class="col-7 pt-2 pb-2">yes</div>
+                    <div class="col-5 pt-2 pb-2">Status</div>
+                    <div class="col-7 pt-2 pb-2"><?php echo $data["status"] ?></div>
                 </div>
 
                 <!-- Edit User Details row -->
                 <div class="row pt-2 pb-2">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./house_form.php" class="btn">Add House</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Edit User Details row -->
-                <div class="row pt-2 pb-2">
-                    <div class="col-12  p-0">
-                        <div class="edit-btn">
-                            <a href="./houses.php" class="btn">Edit</a>
+                            <a href="./house_form_update.php?house_id=<?php echo $data["id"] ?>" class="btn">Edit</a>
                         </div>
                     </div>
                 </div>
@@ -144,34 +153,34 @@
                 <!-- House Information -->
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Apartment Name</div>
-                    <div class="col-7 pt-2 pb-2">The Name</div>
+                    <div class="col-7 pt-2 pb-2"><?php echo $apart["apartmentName"] ?></div>
                 </div>
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Apartment Location</div>
-                    <div class="col-7 pt-2 pb-2">The Location</div>
+                    <div class="col-7 pt-2 pb-2"><?php echo $apart["apartmentLocation"] ?></div>
                 </div>
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">No of Houses</div>
-                    <div class="col-7 pt-2 pb-2">30</div>
+                    <div class="col-7 pt-2 pb-2"><?php echo $apart["numberHouses"] ?></div>
                 </div>
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Occupied Houses</div>
-                    <div class="col-7 pt-2 pb-2">25</div>
+                    <div class="col-7 pt-2 pb-2"><?php echo $apart["occupiedHouses"] ?></div>
                 </div>
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Unoccupied</div>
-                    <div class="col-7 pt-2 pb-2">5</div>
+                    <div class="col-7 pt-2 pb-2"><?php echo $apart["emptyHouses"] ?></div>
                 </div>
 
                 <!-- Edit User Details row -->
                 <div class="row pt-2 pb-2">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./apartment_profile.php" class="btn">View</a>
+                            <a href="./apartment_profile.php?id=<?php echo $apart["id"] ?>" class="btn">View</a>
                         </div>
                     </div>
                 </div>

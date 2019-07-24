@@ -49,27 +49,27 @@
                             $result = mysqli_query($conn, "SELECT * FROM users");
                         
                                 while($row = mysqli_fetch_array($result)) {
-                                    echo '
-                                        <tr id="table-row" class="g-primary">
-                                            <td>'.$row["firstName"].'</td>
-                                            <td>'.$row["lastName"].'</td>
-                                            <td>'.$row["gender"].'</td>
-                                            <td>'.$row["nationalId"].'</td>
-                                            <td>'.$row["phoneNo"].'</td>
-                                            <td>'.$row["email"].'</td>
-                                            <td>'.$row["registrationData"].'</td>
-                                            <td>'.$row["firstName"].'</td>
-                                            <td class="p-0">
-                                            <a href="#" id="table-btn">Update</a>
-                                            </td>
-                                            <td class="p-0">
-                                            <a href="#" id="table-btn">Delete</a>
-                                            </td>
-                                        </tr>
-                                        ';
-                                }
+                                ?>      
+                                <tr id="table-row" class="g-primary">
+                                    <td><?php echo $row["firstName"]?></td>
+                                    <td><?php echo $row["lastName"] ?></td>
+                                    <td><?php echo $row["gender"] ?></td>
+                                    <td><?php echo $row["nationalId"] ?></td>
+                                    <td><?php echo $row["phoneNo"]?></td>
+                                    <td><?php echo $row["email"] ?></td>
+                                    <td><?php echo $row["registrationData"] ?></td>
+                                    <td><?php echo $row["firstName"] ?></td>
+                                    <td class="p-0">
+                                        <a href="#" id="table-btn">Update</a>
+                                    </td>
+                                    <td class="p-0">
+                                        <a href="#" id="table-btn">Delete</a>
+                                    </td>
+                                </tr>
+                                        
+                               <?php } ?>
                         
-                        ?>                       
+                                              
                    </tbody>
                </table>
             </div>

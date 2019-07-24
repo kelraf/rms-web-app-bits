@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register</title>
+    <title>Apartment Update</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/custom/forms.css">
 </head>
@@ -25,10 +25,10 @@
     <div class="container">
         <div class="row">
             <div class="col-12 bg-primary">
-                <form action="../../rms-api/api/apart-api/create.php" method="post" class="register">
+                <form action="../../rms-api/api/apart-api/update.php" method="post" class="register">
 
                     <div class="reg-header">
-                        <h4>Add Apartment</h4>
+                        <h4>Update Apartment</h4>
                     </div>
 
                     <div class="form-group  pt-2 pb-2">
@@ -38,11 +38,12 @@
 
                     <div class="form-group pt-2 pb-2">
                         <label for="apartmentLocation">Apartment Location</label>
+                        <input type="hidden" value="<?php echo $apart_id  ?>" name="apart_id" />
                         <input type="text" class="form-control" name="apartmentLocation" value="<?php echo $apart["apartmentLocation"] ?>" placeholder="Enter Your Apartment Location">
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-custom btn-50">Add It</button>
+                        <button type="submit" class="btn btn-primary btn-custom btn-50">Update</button>
                     </div>
 
                 </form>

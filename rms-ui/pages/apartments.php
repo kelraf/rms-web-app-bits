@@ -57,21 +57,22 @@
                             $results = mysqli_query($conn, "SELECT * FROM apartments");
                             
                             while($data = mysqli_fetch_array($results)) {
-                                echo '
+                                ?>
+                                
                                 <tr id="table-row" class="table-row pt-3">
-                                    <td>'.$data["apartmentName"].'</td>
-                                    <td>'.$data["apartmentLocation"].'</td>
-                                    <td>'.$data["numberHouses"].'</td>
-                                    <td>'.$data["emptyHouses"].'</td>
-                                    <td>'.$data["occupiedHouses"].'</td>
+                                    <td><?php echo $data["apartmentName"] ?></td>
+                                    <td><?php echo $data["apartmentLocation"] ?></td>
+                                    <td><?php echo $data["numberHouses"] ?></td>
+                                    <td><?php echo $data["emptyHouses"] ?></td>
+                                    <td><?php echo $data["occupiedHouses"] ?></td>
                                     <td class="p-0">
-                                        <a href="./apartment_profile.php?id='.$data["id"].' class="btn mt-1 mb-1" id="table-btn">More</a>
+                                        <a href="./apartment_profile.php?id=<?php echo $data["id"] ?> class="btn mt-1 mb-1" id="table-btn">More</a>
                                     </td>
                                 </tr>
-                                ';
-                            }
+                                
+                            <?php } ?>
                         
-                        ?>
+                        
 
                     </tbody>
                 </table>
