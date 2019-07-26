@@ -16,6 +16,7 @@
 <body class="bg-primary">
 
     <?php
+    
     session_start();
     $user_id = $_SESSION["user_id"];
 
@@ -55,7 +56,7 @@
                 <div class="row">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./user_update.php?id=<?php echo $user["id"] ?>" class="btn">Edit Infor</a>
+                            <a href="./user_update.php?user_id=<?php echo $user["id"] ?>" class="btn">Edit Infor</a>
                         </div>
                     </div>
                 </div>

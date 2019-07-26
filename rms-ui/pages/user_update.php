@@ -15,8 +15,7 @@
     <?php
 
     include "../../rms-api/database.php";
-    session_start();
-    $user_id = $_SESSION["user_id"];
+    $user_id = $_GET["user_id"];
     include "../../rms-api/database.php";
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id='$user_id'");
     $user = mysqli_fetch_array($result);
@@ -44,17 +43,18 @@
                     </div>
 
                     <div class="form-check form-check-inline pt-2 pb-2">
-                        <input type="radio" class="form-check-input" value="male" name="gender" checked>
+                        <input type="radio" class="form-check-input update" value="male" name="gender" checked>
                         <label for="male" class="form-check-label">Male</label>
                     </div>
 
                     <div class="form-check form-check-inline pt-2 pb-2">
-                        <input type="radio" class="form-check-input" value="female" name="gender">
+                        <input type="radio" class="form-check-input update" value="female" name="gender">
+                        <input type="hidden" class="form-check-input update" value="<?php echo $user_id ?>" name="user_id">
                         <label for="female" class="form-check-label">Female</label>
                     </div>
 
                     <div class="form-check form-check-inline pt-2 pb-2">
-                        <input type="radio" class="form-check-input" value="other" name="gender">
+                        <input type="radio" class="form-check-input update" value="other" name="gender">
                         <label for="other" class="form-check-label">Other</label>
                     </div>
 
@@ -83,7 +83,11 @@
     <!-- <script src="../js/custom/custom-libraries/popper.js"></script> -->
 
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/custom/landlord.js"></script>
+    <script src="../js/custom/user_update.js"></script>
+
+    <script>
+        let gender = "<?php echo $user["gender"] ?>";
+    </script>
 </body>
 
 </html>

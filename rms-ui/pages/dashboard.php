@@ -21,6 +21,12 @@
 // $result = mysqli_query($conn, "SELECT * FROM users WHERE id='2'");
 // $user = msqli_fetch_array($result);
 
+session_start();
+if(isset($_SESSION["message"])) {
+    echo $_SESSION["message"];
+}
+
+
 ?>
 
     <!-- Mobile Version Responsive -->
