@@ -7,11 +7,10 @@
     $gender = $_POST["gender"];
     $email = $_POST["email"];
     $phoneNo = $_POST["phoneNo"];
-    $nationalId = $_POST["nationalId"];
 
     $sql = mysqli_query(
         $conn, "UPDATE users 
-        SET firstName = '$firstName', lastName = '$lastName', gender = '$gender', nationalId = '$nationalId', phoneNo = '$phoneNo', email = '$email' 
+        SET firstName = '$firstName', lastName = '$lastName', gender = '$gender', phoneNo = '$phoneNo', email = '$email' 
         WHERE id= 5"
     );
 

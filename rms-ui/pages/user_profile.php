@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,18 @@
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/custom/user_profile.css">
 </head>
+
 <body class="bg-primary">
+
+    <?php
+    session_start();
+    $user_id = $_SESSION["user_id"];
+
+    include "../../rms-api/database.php";
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE id='$user_id'");
+    $user = mysqli_fetch_array($result);
+
+    ?>
 
     <!-- Back Button -->
     <a href="./dashboard.php" class="back-arrow-btn">
@@ -35,15 +47,15 @@
 
                 <!-- Names row -->
                 <div class="row mt-3 mb-3 pt-2 pb-2 text-center g-danger">
-                    <div class="col-6">First Name</div>
-                    <div class="col-6">Last Name</div>
+                    <div class="col-6"><?php echo $user["firstName"] ?></div>
+                    <div class="col-6"><?php echo $user["lastName"] ?></div>
                 </div>
 
                 <!-- Edit Names row -->
                 <div class="row">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./user_update.php" class="btn">Edit Infor</a>
+                            <a href="./user_update.php?id=<?php echo $user["id"] ?>" class="btn">Edit Infor</a>
                         </div>
                     </div>
                 </div>
@@ -51,47 +63,41 @@
                 <!-- Gender Row -->
                 <div class="row mt-3 bb mb-3">
                     <div class="col-5">Gender</div>
-                    <div class="col-7">Male</div>
-                </div>
-
-                <!-- Id Row -->
-                <div class="row mt-3 bb mb-3">
-                    <div class="col-5">National Id</div>
-                    <div class="col-7">3543262</div>
+                    <div class="col-7"><?php echo $user["gender"] ?></div>
                 </div>
 
                 <!-- Phone Number -->
                 <div class="row mt-3 bb mb-3">
                     <div class="col-5">Phone No</div>
-                    <div class="col-7">0723542345</div>
+                    <div class="col-7"><?php echo $user["phoneNo"] ?></div>
                 </div>
 
                 <!-- Email -->
                 <div class="row mt-3 bb mb-3">
                     <div class="col-5">Email</div>
-                    <div class="col-7">rafwambugu@gmail.com</div>
+                    <div class="col-7"><?php echo $user["email"] ?></div>
                 </div>
 
                 <!-- Registration Date -->
                 <div class="row mt-3 bb mb-3">
                     <div class="col-5">Registration Date</div>
-                    <div class="col-7">Date</div>
+                    <div class="col-7"><?php echo $user["registrationData"] ?></div>
                 </div>
 
-                 <!-- Edit User Details row -->
-                 <div class="row">
-                     <div class="col-12  p-0">
-                         <div class="edit-btn">
-                             <a href="#" class="btn">Edit Passwords</a>
-                         </div>
-                     </div>
-                 </div>
+                <!-- Edit User Details row -->
+                <div class="row">
+                    <div class="col-12  p-0">
+                        <div class="edit-btn">
+                            <a href="#" class="btn">Edit Passwords</a>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
             <div class="col-md-9 g-danger">
                 <div class="row text-center">
-                    
+
                     <div class="col-3 p-0 items g-success">
                         <div class="icon">
                             <i class="fa fa-building pt-1 pb-1 fa-5x"></i>
@@ -136,4 +142,5 @@
         </div>
     </div>
 </body>
+
 </html>

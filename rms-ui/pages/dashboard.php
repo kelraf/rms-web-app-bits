@@ -15,6 +15,14 @@
 
 <body class="bg-primary" onload="dashboard();">
 
+<?php
+
+// include "../../rms-api/database.php";
+// $result = mysqli_query($conn, "SELECT * FROM users WHERE id='2'");
+// $user = msqli_fetch_array($result);
+
+?>
+
     <!-- Mobile Version Responsive -->
     <div class="container-fluid pt-1 pb-1 bg-dange resp">
         <div class="row bg-succes pt-1 pb-1">

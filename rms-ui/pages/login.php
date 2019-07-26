@@ -15,26 +15,25 @@
     <div class="container">
         <div class="row">
             <div class="col-12 bg-primary">
-                <form action="" method="post" class="register">
+                <form action="../../rms-api/api/users-api/login.php" method="post" class="register">
 
                     <div class="reg-header">
                         <h4>Login</h4>
                     </div>
 
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" placeholder="Enter Your Username" name="username">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" placeholder="Enter Your Email" name="email">
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" placeholder="Enter Your Password"
-                            name="password">
+                        <input type="password" class="form-control" placeholder="Enter Your Password" name="password">
                     </div>
 
                     <div class="form-group">
-                        <!-- <button type="submit" class="btn btn-primary btn-custom btn-50">Login</button> -->
-                        <a class="btn btn-primary btn-custom btn-50 text-white" href="./dashboard.php">Login</a>
+                        <button type="submit" class="btn btn-primary btn-custom btn-50">Login</button>
+                        <!-- <a class="btn btn-primary btn-custom btn-50 text-white" href="./dashboard.php">Login</a> -->
                     </div>
 
                 </form>

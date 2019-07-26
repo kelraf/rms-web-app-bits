@@ -12,6 +12,18 @@
 
 <body class="bg-primary">
 
+    <?php
+
+    include "../../rms-api/database.php";
+    session_start();
+    $user_id = $_SESSION["user_id"];
+    include "../../rms-api/database.php";
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE id='$user_id'");
+    $user = mysqli_fetch_array($result);
+
+    ?>
+
+
     <div class="container">
         <div class="row">
             <div class="col-12 bg-primary">
@@ -23,12 +35,12 @@
 
                     <div class="form-group">
                         <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" placeholder="Enter Your First Name" name="firstName">
+                        <input type="text" class="form-control" value="<?php echo $user["firstName"] ?>" placeholder="Enter Your First Name" name="firstName">
                     </div>
 
                     <div class="form-group">
                         <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" name="lastName" placeholder="Enter Your Last Name">
+                        <input type="text" class="form-control" value="<?php echo $user["lastName"] ?>" name="lastName" placeholder="Enter Your Last Name">
                     </div>
 
                     <div class="form-check form-check-inline pt-2 pb-2">
@@ -48,22 +60,16 @@
 
                     <div class="form-group">
                         <label for="phoneNumber">Phone Number</label>
-                        <input type="number" class="form-control" placeholder="Enter Your Phone Number" name="phoneNo">
+                        <input type="number" class="form-control" value="<?php echo $user["phoneNo"] ?>" placeholder="Enter Your Phone Number" name="phoneNo">
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" placeholder="Enter Your Email" name="email">
+                        <input type="email" class="form-control" value="<?php echo $user["email"] ?>" placeholder="Enter Your Email" name="email">
                     </div>
 
                     <div class="form-group">
-                        <label for="nationalId">National Id</label>
-                        <input type="number" class="form-control" placeholder="Enter Your National Id" name="nationalId">
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-custom btn-50">Register</button>
-                        <!-- <a class="btn btn-primary btn-custom btn-50 text-white" href="./dashboard.php">Register</a> -->
+                        <button type="submit" class="btn btn-primary btn-custom btn-50">Update</button>
                     </div>
 
                 </form>
