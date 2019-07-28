@@ -80,7 +80,7 @@
                 <div class="row pt-2 pb-2">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./house_form.php<?php echo "?apart_id=" . $data["id"] ?>" class="btn">Delete</a>
+                            <a href="../../rms-api/api/apart-api/delete.php<?php echo "?apart_id=" . $data["id"] ?>" class="btn">Delete</a>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
 
                                 <!-- Edit User Details row -->
                                 <div class="edit-btn">
-                                    <a href="./houses.php" class="btn">Houses</a>
+                                    <a href="apart-houses.php?apart_id=<?php echo $data["id"] ?>" class="btn">Houses</a>
                                 </div>
                             </div>
 

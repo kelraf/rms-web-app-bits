@@ -14,7 +14,8 @@
                         );
 
     if($done) {
-        header("Location: ../../../rms-ui/pages/dashboard.php");
+        
+        header("Location: ../../../rms-ui/pages/login.php");
     } else {
         echo "Error";
     }

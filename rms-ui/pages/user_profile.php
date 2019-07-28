@@ -24,7 +24,7 @@
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id='$user_id'");
     $user = mysqli_fetch_array($result);
 
-    ?>
+    ?> 
 
     <!-- Back Button -->
     <a href="./dashboard.php" class="back-arrow-btn">
@@ -89,7 +89,7 @@
                 <div class="row">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="#" class="btn">Edit Passwords</a>
+                            <a href="./password-update.php?user_id=<?php echo $user["id"] ?>" class="btn">Edit Passwords</a>
                         </div>
                     </div>
                 </div>

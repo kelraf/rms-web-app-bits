@@ -30,7 +30,7 @@
         $apart = mysqli_fetch_array($query_one);
 
         if ($apart) {
-            echo "Success";
+            echo "Success"; 
         }
     } else {
         echo "No Data Available";
@@ -90,7 +90,7 @@
                 <div class="row pt-2 pb-2">
                     <div class="col-12  p-0">
                         <div class="edit-btn">
-                            <a href="./houses.php" class="btn">Delete</a>
+                            <a href="../../rms-api/api/house-api/delete.php?house_id=<?php echo $data["id"] ?>" class="btn">Delete</a>
                         </div>
                     </div>
                 </div>
