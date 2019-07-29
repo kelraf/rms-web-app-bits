@@ -13,9 +13,9 @@
 
     if ($done) {
 
-        header("Location: ../../../rms-ui/pages/dashboard.php");
+        header("Location: ../../../rms-ui/pages/houses.php");
 
     } else {
         echo "Error".mysqli_error($conn);
-        // header("Location: ../../../rms-ui/pages/house_form.php");
+        header("Location: ../../../rms-ui/pages/house_form.php");
     }

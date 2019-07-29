@@ -22,7 +22,29 @@
     $query = mysqli_query($conn, "SELECT * FROM apartments WHERE id='$apart_id'");
     $data = mysqli_fetch_array($query);
     if ($data) {
-        echo "Data available";
+        $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE apartmentId='$apart_id'");
+        $occupied = 0;
+        $empty = 0;
+        $count = 0;
+
+        $house = mysqli_fetch_array($query_two);
+
+        if($query_two) {
+            while ($house = mysqli_fetch_array($query_two)) {
+
+                if($house["status"] == "notOccupie") {
+                    $empty ++;
+                    $count ++;
+                } else {
+                    $occupied ++;
+                    $count ++;
+                }
+            }
+
+        } else {
+            echo "Data Not available";
+        }
+        
     } else {
         echo "No Data Available";
     }
@@ -134,38 +156,44 @@
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Total Houses</div>
-                    <div class="col-7 pt-2 pb-2"><?php
-                                                    if (empty($data["numberHouses"])) {
-                                                        echo "Not Available";
-                                                    } else {
-                                                        echo $data["numberHouses"];
-                                                    }
-                                                    ?></div>
+                    <div class="col-7 pt-2 pb-2">
+                        <?php
+                            if (empty($count)) {
+                                echo "Not Available";
+                            } else {
+                                echo $count;
+                            }
+                        ?>
+                    </div>
                 </div>
 
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Occupied Houses</div>
-                    <div class="col-7 pt-2 pb-2"><?php
-                                                    if (empty($data["numberHouses"])) {
-                                                        echo "Not Available";
-                                                    } else {
-                                                        echo $data["occupiedHouses"];
-                                                    }
-                                                    ?></div>
+                    <div class="col-7 pt-2 pb-2">
+                        <?php
+                            if (empty($occupied)) {
+                                echo "Not Available";
+                            } else {
+                                echo $occupied;
+                            }
+                        ?>
+                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Unoccupied Houses</div>
-                    <div class="col-7 pt-2 pb-2"><?php
+                    <div class="col-7 pt-2 pb-2">
+                        <?php
 
-                                                    if (empty($data["numberHouses"])) {
-                                                        echo "Not Available";
-                                                    } else {
-                                                        echo $data["emptyHouses"];
-                                                    }
+                            if (empty($empty)) {
+                                echo "Not Available";
+                            } else {
+                                echo $empty;
+                            }
 
-                                                    ?></div>
+                        ?>
+                    </div>
                 </div>
 
                 <div class="row">

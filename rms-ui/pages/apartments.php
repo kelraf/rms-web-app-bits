@@ -66,7 +66,7 @@
                                     <td><?php echo $data["emptyHouses"] ?></td>
                                     <td><?php echo $data["occupiedHouses"] ?></td>
                                     <td class="p-0">
-                                        <a href="./apartment_profile.php?id=<?php echo $data["id"] ?> class="btn mt-1 mb-1" id="table-btn">More</a>
+                                        <a href="./apartment_profile.php?id=<?php echo $data["id"] ?>"" class="btn mt-1 mb-1" id="table-btn">More</a>
                                     </td>
                                 </tr>
                                 

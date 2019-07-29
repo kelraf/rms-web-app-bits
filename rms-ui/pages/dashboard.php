@@ -17,15 +17,41 @@
 
 <?php
 
-// include "../../rms-api/database.php";
-// $result = mysqli_query($conn, "SELECT * FROM users WHERE id='2'");
-// $user = msqli_fetch_array($result);
+    include "../../rms-api/database.php";
+    $query = mysqli_query($conn, "SELECT * FROM apartments WHERE id='$apart_id'");
+    $data = mysqli_fetch_array($query);
+    if ($data) {
+        $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE apartmentId='$apart_id'");
+        $occupied = 0;
+        $empty = 0;
+        $count = 0;
 
-session_start();
-if(isset($_SESSION["message"])) {
-    echo $_SESSION["message"];
-    $_SESSION["message"] = null;
-}
+        $house = mysqli_fetch_array($query_two);
+
+        if ($query_two) {
+            while ($house = mysqli_fetch_array($query_two)) {
+
+                if ($house["status"] == "notOccupie") {
+                    $empty++;
+                    $count++;
+                } else {
+                    $occupied++;
+                    $count++;
+                }
+            }
+        } else {
+            echo "Data Not available";
+        }
+    } else {
+        echo "No Data Available";
+    }
+
+
+    session_start();
+    if(isset($_SESSION["message"])) {
+        echo $_SESSION["message"];
+        $_SESSION["message"] = null;
+    }
 
 
 ?>
