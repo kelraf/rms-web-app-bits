@@ -1,12 +1,12 @@
 <?php
 
     require_once "../../database.php";
-
+    session_start();
     $houseType = $_POST["houseType"];
     $status = $_POST["status"];
     $rent = $_POST["rent"];
 
-    $landlordId = 1;
+    $landlordId = $_SESSION["user_id"];
     $apartmentId = $_POST["apart_id"];
 
     $done = mysqli_query(

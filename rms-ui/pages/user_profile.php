@@ -24,6 +24,27 @@
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id='$user_id'");
     $user = mysqli_fetch_array($result);
 
+    $query = mysqli_query($conn, "SELECT * FROM apartments WHERE landlordId='$user_id'");
+    $apart_count = 0;
+    while($apartment = mysqli_fetch_array($query)) {
+        $apart_count ++;
+    }
+
+    
+    $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE landlordId='$user_id'");
+
+    $house_count = 0;
+    $empty = 0;
+    $occupied = 0;
+    while($house = mysqli_fetch_array($query_two)) {
+        $house_count ++;
+        if($house["status"] == "notOccupied") {
+            $empty ++;
+        } else {
+            $occupied ++;
+        }
+    }
+
     ?> 
 
     <!-- Back Button -->
@@ -104,7 +125,7 @@
                             <i class="fa fa-building pt-1 pb-1 fa-5x"></i>
                         </div>
                         <div class="name">Apartments</div>
-                        <div class="number">40</div>
+                        <div class="number"><?php echo $apart_count ?></div>
                     </div>
 
                     <div class="col-3 p-0 items g-success">
@@ -112,7 +133,7 @@
                             <i class="fa fa-home pt-1 pb-1 fa-5x"></i>
                         </div>
                         <div class="name">Houses</div>
-                        <div class="number">30</div>
+                        <div class="number"><?php echo $house_count ?></div>
                     </div>
 
                     <div class="col-3 p-0 items g-success">

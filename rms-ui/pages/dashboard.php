@@ -18,36 +18,32 @@
 <?php
 
     include "../../rms-api/database.php";
-    $query = mysqli_query($conn, "SELECT * FROM apartments WHERE id='$apart_id'");
-    $data = mysqli_fetch_array($query);
-    if ($data) {
-        $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE apartmentId='$apart_id'");
-        $occupied = 0;
-        $empty = 0;
-        $count = 0;
 
-        $house = mysqli_fetch_array($query_two);
+    session_start();
+    $user_id = $_SESSION["user_id"];
 
-        if ($query_two) {
-            while ($house = mysqli_fetch_array($query_two)) {
+    $query = mysqli_query($conn, "SELECT * FROM apartments WHERE landlordId='$user_id'");
+    $apart_count = 0;
+    while($apartment = mysqli_fetch_array($query)) {
+        $apart_count ++;
+    }
 
-                if ($house["status"] == "notOccupie") {
-                    $empty++;
-                    $count++;
-                } else {
-                    $occupied++;
-                    $count++;
-                }
-            }
+    
+    $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE landlordId='$user_id'");
+
+    $house_count = 0;
+    $empty = 0;
+    $occupied = 0;
+    while($house = mysqli_fetch_array($query_two)) {
+        $house_count ++;
+        if($house["status"] == "notOccupied") {
+            $empty ++;
         } else {
-            echo "Data Not available";
+            $occupied ++;
         }
-    } else {
-        echo "No Data Available";
     }
 
 
-    session_start();
     if(isset($_SESSION["message"])) {
         echo $_SESSION["message"];
         $_SESSION["message"] = null;
@@ -261,10 +257,10 @@
                                             <i class="fa fa-building pt-1 pb-1 fa-4x"></i>
                                         </div>
                                         <div class="name">Apartments</div>
-                                        <div class="number">40</div>
+                                        <div class="number"><?php echo $apart_count ?></div>
                                     </a>
                                 </div>
-
+<!-- tt -->
                                 <!-- Houses -->
                                 <div class="col-md-4 content-cols p-0">
                                     <a href="./houses.php" class="content-hold p-1">
@@ -272,7 +268,7 @@
                                             <i class="fa fa-home pt-1 pb-1 fa-4x"></i>
                                         </div>
                                         <div class="name">Houses</div>
-                                        <div class="number">30</div>
+                                        <div class="number"><?php echo $house_count ?></div>
                                     </a>
                                 </div>
 
@@ -284,7 +280,7 @@
                                             <i class="fa fa-users pt-1 pb-1 fa-5x with-pple"></i>
                                         </div>
                                         <div class="name">Occupied Houses</div>
-                                        <div class="number">30</div>
+                                        <div class="number"><?php echo $occupied ?></div>
                                     </a>
                                 </div>
                             </div>
@@ -300,7 +296,7 @@
                                             <i class="fa fa-users text-danger pt-1 pb-1 fa-4x with-pple"></i>
                                         </div>
                                         <div class="name">Unoccupied Houses</div>
-                                        <div class="number">30</div>
+                                        <div class="number"><?php echo $empty ?></div>
                                     </a>
                                 </div>
 
@@ -392,7 +388,7 @@
                                 <div class="col-md-5">
                                     <div class="row">
                                         <div class="col-6">Total Apartments</div>
-                                        <div class="col-3">7</div>
+                                        <div class="col-3"><?php echo $apart_count ?></div>
                                         <div class="col-md-3 pt-1 pb-1">
                                             <a href="./apartments.php" class="btn btn-custom">View</a>
                                         </div>
@@ -415,7 +411,7 @@
                                             <!-- <i class="fa fa-building pt-1 pb-1 fa-5x with-pple"></i> -->
                                         </div>
                                         <div class="name">Number of Apartments</div>
-                                        <div class="number">30</div>
+                                        <div class="number"><?php echo $apart_count ?></div>
                                     </a>
                                 </div>
 
@@ -472,7 +468,7 @@
                                 <div class="col-md-4">
                                     <div class="row">
                                         <div class="col-6">Total Houses</div>
-                                        <div class="col-3">677</div>
+                                        <div class="col-3"><?php echo $house_count ?></div>
                                         <div class="col-3 p-0">
                                             <a href="#" class="btn btn-custom">View</a>
                                         </div>
@@ -495,7 +491,7 @@
                                             <i class="fa fa-users pt-1 pb-1 fa-5x with-pple"></i>
                                         </div>
                                         <div class="name">Occupied Houses</div>
-                                        <div class="number">30</div>
+                                        <div class="number"><?php echo $occupied ?></div>
                                     </a>
                                 </div>
 
@@ -506,7 +502,7 @@
                                             <i class="fa fa-users pt-1 pb-1 fa-5x with-pple text-danger"></i>
                                         </div>
                                         <div class="name">Unoccupied Houses</div>
-                                        <div class="number">30</div>
+                                        <div class="number"><?php echo $empty ?></div>
                                     </a>
                                 </div>
 
@@ -603,7 +599,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    <a href="./register.php" class="btn btn-custom ">Add Tenant</a>
+                                    <a href="./add_tenant.php" class="btn btn-custom ">Add Tenant</a>
                                 </div>
 
                             </div>

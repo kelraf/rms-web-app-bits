@@ -30,7 +30,6 @@
                            <td>First Name</td>
                            <td>Last Name</td>
                            <td>Gender</td>
-                           <td>National Id</td>
                            <td>Phone Number</td>
                            <td>Email</td>
                            <td>Registration Date</td>
@@ -45,8 +44,10 @@
                         <?php 
                         
                             include "../../rms-api/database.php";
+                            session_start();
+                            $user_id = $_SESSION["user_id"];
 
-                            $result = mysqli_query($conn, "SELECT * FROM users");
+                            $result = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
                         
                                 while($row = mysqli_fetch_array($result)) {
                                 ?>      
@@ -54,16 +55,15 @@
                                     <td><?php echo $row["firstName"]?></td>
                                     <td><?php echo $row["lastName"] ?></td>
                                     <td><?php echo $row["gender"] ?></td>
-                                    <td><?php echo $row["nationalId"] ?></td>
                                     <td><?php echo $row["phoneNo"]?></td>
                                     <td><?php echo $row["email"] ?></td>
                                     <td><?php echo $row["registrationData"] ?></td>
                                     <td><?php echo $row["firstName"] ?></td>
                                     <td class="p-0">
-                                        <a href="#" id="table-btn">Update</a>
+                                        <a href="tenant_update.php?user_id=<?php echo $row["id"] ?>" id="table-btn">Update</a>
                                     </td>
                                     <td class="p-0">
-                                        <a href="#" id="table-btn">Delete</a>
+                                        <a href="../../rms-api/api/users-api/del_tenant.php?user_id=<?php echo $row["id"] ?>" id="table-btn">Delete</a>
                                     </td>
                                 </tr>
                                         

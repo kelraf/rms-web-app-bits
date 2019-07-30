@@ -6,7 +6,7 @@
     $passw = $_POST["password"];
     $conf_passw = $_POST["confirm_password"];
 
-    $landlord = true;
+    $landlord = true; 
 
     $done = mysqli_query($conn, 
                         "INSERT INTO users (email, confirmPassw, passw, landlord)

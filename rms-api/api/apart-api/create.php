@@ -1,10 +1,11 @@
 <?php 
 
     require_once "../../database.php";
+    session_start();
 
     $apartmentName = $_POST["apartmentName"];
     $apartmentLocation = $_POST["apartmentLocation"];
-    $landlordId = 1; 
+    $landlordId = $_SESSION["user_id"]; 
 
     $done = mysqli_query($conn, 
                         "INSERT INTO apartments (apartmentName, apartmentLocation, landlordId)
@@ -17,3 +18,5 @@
         echo "Error";
         header("Location: ../../../rms-ui/pages/apartment_form.php");
     }
+
+    echo $_SESSION["user_id"];
