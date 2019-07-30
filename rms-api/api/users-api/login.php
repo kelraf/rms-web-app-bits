@@ -16,8 +16,12 @@
     if($user) {
         session_start();
         $_SESSION["user_id"] = $user["id"];
-        // print_r($_SESSION);
-        header("Location: ../../../rms-ui/pages/dashboard.php");
+        if(!empty($user["admin"])) {
+            header("Location: ../../../rms-ui/pages/dashboard-admin.php");
+        } else {
+            header("Location: ../../../rms-ui/pages/dashboard.php");
+        }
+        
     } else {
         echo "Error".'mysqli_error($conn)';
     }

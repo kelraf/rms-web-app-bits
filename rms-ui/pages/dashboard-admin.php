@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Landlord</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../fontawesome-free-5.9.0-web/css/fontawesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,18 +18,17 @@
     <?php
 
     include "../../rms-api/database.php";
-
     session_start();
     $user_id = $_SESSION["user_id"];
 
-    $query = mysqli_query($conn, "SELECT * FROM apartments WHERE landlordId='$user_id'");
+    $query = mysqli_query($conn, "SELECT * FROM apartments");
     $apart_count = 0;
     while ($apartment = mysqli_fetch_array($query)) {
         $apart_count++;
     }
 
 
-    $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE landlordId='$user_id'");
+    $query_two = mysqli_query($conn, "SELECT * FROM houses");
 
     $house_count = 0;
     $empty = 0;
@@ -49,15 +48,12 @@
         $_SESSION["message"] = null;
     }
 
-    $query_three = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
+    $query_three = mysqli_query($conn, "SELECT * FROM tenants");
     $tenant_count = 0;
 
     while ($tenant = mysqli_fetch_array($query_three)) {
         $tenant_count++;
     }
-
-    echo $tenant_count;
-
 
     ?>
 
@@ -106,7 +102,7 @@
                     <div class="container">
                         <div class="row pt-3 pb-3">
                             <div class="col-md-10 col-6">
-                                <h3 class="text-center rms">Rental Managment System</h3>
+                                <h3 class="text-center rms">Rental Managment System <strong>Admin</strong></h3>
                             </div>
                             <div class="col-md-2 col-6">
                                 <div class="row">
