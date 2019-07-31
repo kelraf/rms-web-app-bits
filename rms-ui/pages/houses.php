@@ -8,8 +8,7 @@
     <title>Houses</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" href="../css/custom/custome-libraries/datatables.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../fontawesome-free-5.9.0-web/css/fontawesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
@@ -42,35 +41,55 @@
                             <td>House Type</td>
                             <td>Status</td>
                             <td>Rent</td>
-                            <!-- <td>Apartment Location</td> -->
+                            <td>Action</td>
                             <td></td>
                         </tr>
                     </thead>
 
                     <tbody class="bg-primary" id="table-body">
 
-                        <?php  
-                        
-                            require_once "../../rms-api/api/house-api/get-houses.php";
-                            
-                            if($data) {
-                                foreach($data as $row) {
-                        ?>
+                        <?php
 
-                                    <tr id="table-row" class="g-primary">
+                        require_once "../../rms-api/api/house-api/get-houses.php";
+
+                        if ($data) {
+                            foreach ($data as $row) {
+                                ?>
+
+                                <tr id="table-row" class="g-primary">
                                     <td><?php echo $row["houseType"] ?></td>
                                     <td><?php echo $row["status"] ?></td>
                                     <td><span class="pr-1">Kshs</span><?php echo $row["rent"] ?></td>
-                                    <!-- <td><?php echo $row["houseType"] ?></td> -->
                                     <td class="p-0">
-                                        <a href="./house_profile.php?house_id=<?php echo $row["id"] ?>" class="btn mt-1 mb-1" id="table-btn">More</a>
+                                        <?php
+                                        if ($row["status"] == "occupied") {
+                                            echo "Occupied";
+                                        } else {
+                                            if (isset($_GET["user_id"])) {
+                                                $user_id = $_GET["user_id"];
+                                                ?>
+                                                <a href="../../rms-api/api/house-api/place_tenant.php?user_id=<?php echo $user_id ?>&house_id=<?php echo $row["id"]  ?>"" class=" btn m-1" id="table-btn">Place</a>
+                                            <?php
+                                            } else {
+
+                                                ?>
+
+                                                <a href="users.php?house_id=<?php echo $row["id"] ?>"" class=" btn m-1" id="table-btn">Place</a>
+
+                                            <?php
+                                            }
+                                        }
+                                        ?>
+                                    </td>
+                                    <td class="p-0">
+                                        <a href="./house_profile.php?house_id=<?php echo $row["id"] ?>" class="btn m-1" id="table-btn">More</a>
                                     </td>
 
-                               <?php } ?>
-                        <?php } else { ?>
+                                <?php } ?>
+                            <?php } else { ?>
                             <tr>No Houses Yet</tr>
                         <?php } ?>
-                            
+
                     </tbody>
                 </table>
             </div>

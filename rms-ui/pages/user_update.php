@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/custom/forms.css">
 </head>
@@ -21,6 +22,12 @@
     $user = mysqli_fetch_array($result);
 
     ?>
+
+    <!-- Back Button -->
+    <a href="./user_profile.php" class="back-arrow-btn">
+        <i class="fa fa-arrow-left fa-2x"></i>
+    </a>
+
 
 
     <div class="container">

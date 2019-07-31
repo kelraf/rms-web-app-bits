@@ -1,5 +1,22 @@
 body {
-    /* background: white !important; */
+    color: white;
+    position: relative;
+}
+
+.back-arrow-btn {
+    /* background: red; */
+    position: relative;
+    display: inline-block;
+    width: 50px !important;
+    height: 50px !important;
+    top: 5px;
+    left: 5px;
+    padding-top: 9px;
+    padding-left: 9px;
+    text-decoration: none;
+    color: white;
+    border-radius: 50%;
+    border: 1px solid white;
 }
 
 #users {

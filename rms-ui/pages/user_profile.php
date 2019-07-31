@@ -15,7 +15,7 @@
 
 <body class="bg-primary">
 
-    <?php
+    <?php 
     
     session_start();
     $user_id = $_SESSION["user_id"];
@@ -44,6 +44,14 @@
             $occupied ++;
         }
     }
+
+    $query_three = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
+
+    $tenant_count = 0;
+    while($tenant = mysqli_fetch_array($query_three)) {
+        $tenant_count ++;
+    }
+    // echo $tenant_count
 
     ?> 
 
@@ -138,10 +146,10 @@
 
                     <div class="col-3 p-0 items g-success">
                         <div class="icon">
-                            <i class="fa fa-users pt-1 pb-1 fa-1x"></i>
+                            <i class="fa fa-users pt-1 pb-1 fa-5x"></i>
                         </div>
                         <div class="name">Tenants</div>
-                        <div class="number">200</div>
+                        <div class="number"><?php echo $tenant_count ?></div>
                     </div>
 
                     <div class="col-3 p-0 items g-success">

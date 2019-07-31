@@ -9,9 +9,10 @@
         echo "Successfully Connected";
     }
 
-    // require_once "../../database.php";
+    session_start();
+    $user_id = $_SESSION["user_id"];
 
-    $results = mysqli_query($conn, "SELECT * FROM houses");
+    $results = mysqli_query($conn, "SELECT * FROM houses WHERE landlordId='$user_id'");
     
     $data = []; 
 

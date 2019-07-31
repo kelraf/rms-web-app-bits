@@ -14,6 +14,26 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-12 pt-2">
+
+                    <?php 
+                        session_start();
+                        if($_SESSION["message"]) {
+
+                        ?>
+                        <div class="flash-error">
+                            <?php 
+                                echo $_SESSION["message"];
+                                $_SESSION["message"] = null;
+                            ?>
+                        </div>
+                    <?php } ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
             <div class="col-12 bg-primary">
                 <form action="../../rms-api/api/users-api/login.php" method="post" class="register">
 

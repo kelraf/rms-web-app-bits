@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Users</title>
+    <title>Apartments</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" href="../css/custom/custome-libraries/datatables.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -49,22 +49,41 @@
                     </thead>
 
                     <tbody class="bg-primary" id="table-body">
-
+ 
                         <?php  
+                            session_start();
+                            $user_id = $_SESSION["user_id"];
                         
                             include "../../rms-api/database.php";
 
-                            $results = mysqli_query($conn, "SELECT * FROM apartments");
+                            $results = mysqli_query($conn, "SELECT * FROM apartments WHERE landlordId='$user_id'");
                             
                             while($data = mysqli_fetch_array($results)) {
+
+                                $apart_id = $data["id"];
+
+                                $query = mysqli_query($conn, "SELECT * FROM houses WHERE apartmentId='$apart_id'");
+
+                                $house_count = 0;
+                                $empty = 0;
+                                $occupied = 0;
+                                while ($house = mysqli_fetch_array($query)) {
+                                    $house_count++;
+                                    if ($house["status"] == "notOccupied") {
+                                        $empty++;
+                                    } else {
+                                        $occupied++;
+                                    }
+                                }
+
                                 ?>
                                 
                                 <tr id="table-row" class="table-row pt-3">
                                     <td><?php echo $data["apartmentName"] ?></td>
                                     <td><?php echo $data["apartmentLocation"] ?></td>
-                                    <td><?php echo $data["numberHouses"] ?></td>
-                                    <td><?php echo $data["emptyHouses"] ?></td>
-                                    <td><?php echo $data["occupiedHouses"] ?></td>
+                                    <td><?php echo $house_count; ?></td>
+                                    <td><?php echo $empty; ?></td>
+                                    <td><?php echo $occupied; ?></td>
                                     <td class="p-0">
                                         <a href="./apartment_profile.php?id=<?php echo $data["id"] ?>"" class="btn mt-1 mb-1" id="table-btn">More</a>
                                     </td>

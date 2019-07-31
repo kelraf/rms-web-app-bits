@@ -56,7 +56,7 @@
         $tenant_count++;
     }
 
-    echo $tenant_count;
+    // echo $tenant_count;
 
 
     ?>

@@ -6,11 +6,11 @@
     $passw = $_POST["password"];
     $conf_passw = $_POST["confirm_password"];
 
-    $landlord = true; 
+    $role = "landlord"; 
 
     $done = mysqli_query($conn, 
-                        "INSERT INTO users (email, confirmPassw, passw, landlord)
-                            VALUES('$email', '$passw', '$conf_passw', '$landlord')"
+                        "INSERT INTO users (email, confirmPassw, passw, role)
+                            VALUES('$email', '$passw', '$conf_passw', '$role')"
                         );
 
     if($done) {

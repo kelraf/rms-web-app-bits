@@ -1,27 +1,33 @@
 <?php 
 
     require_once "../../database.php";
+    session_start();
 
     $email = $_POST["email"];
     $passw = $_POST["password"];
 
-    // print_r($_POST);
-
-    // $done = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
-    // $user = mysqli_fetch_array($done);
-
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
+    $result = mysqli_query($conn, "SELECT email, passw, role, id FROM users WHERE email='$email'");
     $user = mysqli_fetch_array($result);
 
     if($user) {
-        session_start();
-        $_SESSION["user_id"] = $user["id"];
-        if(!empty($user["admin"])) {
-            header("Location: ../../../rms-ui/pages/dashboard-admin.php");
+        
+        if($user["passw"] != $passw) {
+            $_SESSION["message"] = "Invalid Password";
+            header("Location: ../../../rms-ui/pages/login.php");
         } else {
-            header("Location: ../../../rms-ui/pages/dashboard.php");
+             if($user["role"] == "admin") {
+                $_SESSION["user_id"] = $user["id"];
+                header("Location: ../../../rms-ui/pages/dashboard-admin.php");
+             } elseif($user["role"] == "landlord") {
+                $_SESSION["user_id"] = $user["id"];
+                header("Location: ../../../rms-ui/pages/dashboard.php");
+             } else {
+                $_SESSION["message"] = "User login Error Please Login Again".$user["role"];
+                header("Location: ../../../rms-ui/pages/login.php");
+             }
         }
         
     } else {
-        echo "Error".'mysqli_error($conn)';
+        $_SESSION["message"] = "Invalid Email";
+        header("Location: ../../../rms-ui/pages/login.php");
     }
