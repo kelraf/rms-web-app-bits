@@ -34,6 +34,7 @@
     $house_count = 0;
     $empty = 0;
     $occupied = 0;
+
     while ($house = mysqli_fetch_array($query_two)) {
         $house_count++;
         if ($house["status"] == "notOccupied") {
@@ -56,7 +57,21 @@
         $tenant_count++;
     }
 
-    // echo $tenant_count;
+    $query_four = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
+    $placed_count = 0;
+    $not_placed_count = 0;
+    while ($tenant = mysqli_fetch_array($query_four)) {
+
+        $tenant_id = $tenant["id"];
+        $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE tenantId='$tenant_id'");
+        $house = mysqli_fetch_array($query_two);
+
+        if ($house["id"]) {
+            $placed_count++;
+        } else {
+            $not_placed_count++;
+        }
+    }
 
 
     ?>
@@ -312,10 +327,11 @@
                                 <div class="col-md-4 content-cols p-0">
                                     <a href="#" class="content-hold p-1">
                                         <div class="icon">
-                                            <i class="fa fa-money pt-1 pb-1 fa-4x"></i>
+                                            <i class="fa fa-users pt-1 pb-1 fa-4x"></i>
                                         </div>
-                                        <div class="name">Payed</div>
-                                        <div class="number">Kshs 100000</div>
+                                        <!-- placed -->
+                                        <div class="name">Placed</div>
+                                        <div class="number"><?php echo $placed_count ?></div>
                                     </a>
                                 </div>
 
@@ -323,11 +339,11 @@
                                 <div class="col-md-4 content-cols p-0">
                                     <a href="#" class="content-hold p-1">
                                         <div class="icon">
-                                            <i class="fa fa-money pt-1 pb-1 fa-4x"></i>
-                                            <i class="fa fa-times text-danger pt-1 pb-1 fa-5x with-pple"></i>
+                                            <i class="fa fa-users text-danger pt-1 pb-1 fa-4x"></i>
+                                            <!-- <i class="fa fa-times text-danger pt-1 pb-1 fa-5x with-pple"></i> -->
                                         </div>
-                                        <div class="name">Not Payed</div>
-                                        <div class="number">Kshs 100000</div>
+                                        <div class="name">Not Placed Tenants</div>
+                                        <div class="number"><?php echo $not_placed_count ?></div>
                                     </a>
                                 </div>
                             </div>
@@ -356,13 +372,13 @@
 
                                 </div>
 
-                                <!-- Payment Vs Not Payed Chart -->
+                                <!-- Placed Vs Not Placed Tenants -->
                                 <div class="col-md-6">
 
                                     <!-- Chart Header -->
                                     <div class="row">
                                         <div class="col-12 p-0">
-                                            <p class="lead">Payed Vs Not Payed</p>
+                                            <p class="lead">Placed Vs Not Placed Tenants</p>
                                         </div>
                                     </div>
 
@@ -813,8 +829,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <!-- <script src="../js/custom/custom-libraries/popper.js"></script> -->
     <script src="../js/custom/custom-libraries/chart.js"></script>
-
     <script src="../js/bootstrap.min.js"></script>
+
+    <script>
+        let placed_count = "<?php echo $placed_count; ?>";
+        let not_placed_count = "<?php echo $not_placed_count; ?>";
+
+        let empty = "<?php echo $empty ?>";
+        let total_h = "<?php echo $house_count ?>";
+        let occupied = "<?php echo $occupied ?>";
+        let tenant_count = "<?php echo $tenant_count ?>";
+    </script>
+
     <script src="../js/custom/dashboard.js"></script>
 
 </body>

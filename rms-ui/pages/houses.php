@@ -44,7 +44,7 @@
                             <td>Action</td>
                             <td></td>
                         </tr>
-                    </thead>
+                    </thead> 
 
                     <tbody class="bg-primary" id="table-body">
 

@@ -129,8 +129,8 @@ function dashboard() {
             labelTwo: "UnOccupied",
         },
         data: {
-            firstData: 10,
-            secondData: 20
+            firstData: occupied,
+            secondData: empty
         }
     }
 
@@ -141,10 +141,10 @@ function dashboard() {
 
     // Edit The Data Object Then Call The Method To Create chart Two
     data.elementId = "chart-two";
-    data.labels.labelOne = "Payed";
-    data.labels.labelTwo = "Not Payed";
-    data.data.firstData = 200;
-    data.data.secondData = 1000
+    data.labels.labelOne = "Placed Tenants";
+    data.labels.labelTwo = "Not Placed Tenants";
+    data.data.firstData = placed_count;
+    data.data.secondData = not_placed_count;
     chart(data);
 
     data.elementId = "chart-three";
@@ -154,6 +154,12 @@ function dashboard() {
     chart(data);
 
     data.elementId = "chart-five";
+    data.labels.labelOne = "Total Tenants";
+    data.labels.labelTwo = "Expected Tenants";
+    data.data.firstData = tenant_count;
+    data.data.secondData = total_h;
+
+    // console.log(tenant_count, house_count);
     chart(data);
 
     data.elementId = "chart-six";
