@@ -1,3 +1,16 @@
+
+<?php
+    session_start();
+
+    if(!isset($_SESSION["user_id"])) {
+        $_SESSION["message"] = "Authentication Required Please Login";
+        header("location: login.php");
+    }
+
+    $user_id = $_SESSION["user_id"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,9 +64,7 @@
                     <tbody class="bg-primary" id="table-body">
  
                         <?php  
-                            session_start();
-                            $user_id = $_SESSION["user_id"];
-                        
+                                                   
                             include "../../rms-api/database.php";
 
                             $results = mysqli_query($conn, "SELECT * FROM apartments WHERE landlordId='$user_id'");

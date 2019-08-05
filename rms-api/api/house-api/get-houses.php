@@ -9,7 +9,7 @@
         // echo "Successfully Connected";
     } 
 
-    session_start();
+    // session_start();
     $user_id = $_SESSION["user_id"];
 
     $results = mysqli_query($conn, "SELECT * FROM houses WHERE landlordId='$user_id'");

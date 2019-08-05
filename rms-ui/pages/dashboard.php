@@ -20,58 +20,74 @@
     include "../../rms-api/database.php";
 
     session_start();
-    $user_id = $_SESSION["user_id"];
 
-    $query = mysqli_query($conn, "SELECT * FROM apartments WHERE landlordId='$user_id'");
-    $apart_count = 0;
-    while ($apartment = mysqli_fetch_array($query)) {
-        $apart_count++;
-    }
+    if (isset($_SESSION)) {
+        if (isset($_SESSION["user_id"])) {
+
+            $user_id = $_SESSION["user_id"];
+
+            $query = mysqli_query($conn, "SELECT * FROM apartments WHERE landlordId='$user_id'");
+            $apart_count = 0;
+            while ($apartment = mysqli_fetch_array($query)) {
+                $apart_count++;
+            }
 
 
-    $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE landlordId='$user_id'");
+            $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE landlordId='$user_id'");
 
-    $house_count = 0;
-    $empty = 0;
-    $occupied = 0;
+            $house_count = 0;
+            $empty = 0;
+            $occupied = 0;
 
-    while ($house = mysqli_fetch_array($query_two)) {
-        $house_count++;
-        if ($house["status"] == "notOccupied") {
-            $empty++;
+            while ($house = mysqli_fetch_array($query_two)) {
+                $house_count++;
+                if ($house["status"] == "notOccupied") {
+                    $empty++;
+                } else {
+                    $occupied++;
+                }
+            }
+
+
+            if (isset($_SESSION["message"])) {
+                echo $_SESSION["message"];
+                $_SESSION["message"] = null;
+            }
+
+            $query_three = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
+            $tenant_count = 0;
+
+            while ($tenant = mysqli_fetch_array($query_three)) {
+                $tenant_count++;
+            }
+
+            $query_four = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
+            $placed_count = 0;
+            $not_placed_count = 0;
+            while ($tenant = mysqli_fetch_array($query_four)) {
+
+                $tenant_id = $tenant["id"];
+                $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE tenantId='$tenant_id'");
+                $house = mysqli_fetch_array($query_two);
+
+                if ($house["id"]) {
+                    $placed_count++;
+                } else {
+                    $not_placed_count++;
+                }
+            }
+
+            // $_SESSION["user_id"] = null;
+
         } else {
-            $occupied++;
+            $_SESSION["message"] = "Authentication Required Please Login";
+            header("location: login.php");
         }
+    } else {
+        $_SESSION["message"] = "Authentication Required Please Login";
+        header("location: login.php");
     }
 
-
-    if (isset($_SESSION["message"])) {
-        echo $_SESSION["message"];
-        $_SESSION["message"] = null;
-    }
-
-    $query_three = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
-    $tenant_count = 0;
-
-    while ($tenant = mysqli_fetch_array($query_three)) {
-        $tenant_count++;
-    }
-
-    $query_four = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
-    $placed_count = 0;
-    $not_placed_count = 0;
-    while ($tenant = mysqli_fetch_array($query_four)) {
-
-        $tenant_id = $tenant["id"];
-        $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE tenantId='$tenant_id'");
-        $house = mysqli_fetch_array($query_two);
-
-        if ($house["id"]) {
-            $placed_count++;
-        } else {
-            $not_placed_count++;
-        }
-    }
 
 
     ?>
@@ -244,7 +260,7 @@
                             </div>
                         </div>
                     </a>
-                    <a class="nav-link p-0" id="v-pills-outs-payments-tab" href="../../" role="tab" aria-controls="v-pills-outs-payments" aria-selected="false">
+                    <a class="nav-link p-0" id="v-pills-outs-payments-tab" href="../../rms-api/api/users-api/logout.php" role="tab" aria-controls="v-pills-outs-payments" aria-selected="false">
 
                         <div class="container-fluid pt-2 pb-3">
                             <div class="row">

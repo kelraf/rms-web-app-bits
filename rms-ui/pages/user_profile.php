@@ -1,3 +1,15 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION["user_id"])) {
+        $_SESSION["message"] = "Authentication Required Please Login";
+        header("location: login.php");
+    }
+
+    $user_id = $_SESSION["user_id"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,10 +27,10 @@
 
 <body class="bg-primary">
 
-    <?php 
-    
-    session_start();
-    $user_id = $_SESSION["user_id"];
+    <?php
+
+    // session_start();
+    // $user_id = $_SESSION["user_id"];
 
     include "../../rms-api/database.php";
     $result = mysqli_query($conn, "SELECT * FROM users WHERE id='$user_id'");
@@ -26,34 +38,34 @@
 
     $query = mysqli_query($conn, "SELECT * FROM apartments WHERE landlordId='$user_id'");
     $apart_count = 0;
-    while($apartment = mysqli_fetch_array($query)) {
-        $apart_count ++;
+    while ($apartment = mysqli_fetch_array($query)) {
+        $apart_count++;
     }
 
-    
+
     $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE landlordId='$user_id'");
 
     $house_count = 0;
     $empty = 0;
     $occupied = 0;
-    while($house = mysqli_fetch_array($query_two)) {
-        $house_count ++;
-        if($house["status"] == "notOccupied") {
-            $empty ++;
+    while ($house = mysqli_fetch_array($query_two)) {
+        $house_count++;
+        if ($house["status"] == "notOccupied") {
+            $empty++;
         } else {
-            $occupied ++;
+            $occupied++;
         }
     }
 
     $query_three = mysqli_query($conn, "SELECT * FROM tenants WHERE landlordId='$user_id'");
 
     $tenant_count = 0;
-    while($tenant = mysqli_fetch_array($query_three)) {
-        $tenant_count ++;
+    while ($tenant = mysqli_fetch_array($query_three)) {
+        $tenant_count++;
     }
     // echo $tenant_count
 
-    ?> 
+    ?>
 
     <!-- Back Button -->
     <a href="./dashboard.php" class="back-arrow-btn">

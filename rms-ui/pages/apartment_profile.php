@@ -1,3 +1,15 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION["user_id"])) {
+        $_SESSION["message"] = "Authentication Required Please Login";
+        header("location: login.php");
+    }
+
+    $user_id = $_SESSION["user_id"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,22 +40,20 @@
         $empty = 0;
         $count = 0;
 
-        if($query_two) {
+        if ($query_two) {
             while ($house = mysqli_fetch_array($query_two)) {
 
-                if($house["status"] == "notOccupie") {
-                    $empty ++;
-                    $count ++;
+                if ($house["status"] == "notOccupie") {
+                    $empty++;
+                    $count++;
                 } else {
-                    $occupied ++;
-                    $count ++;
+                    $occupied++;
+                    $count++;
                 }
             }
-
         } else {
             echo "Data Not available";
         }
-        
     } else {
         echo "No Data Available";
     }
@@ -157,11 +167,11 @@
                     <div class="col-5 pt-2 pb-2">Total Houses</div>
                     <div class="col-7 pt-2 pb-2">
                         <?php
-                            if (empty($count)) {
-                                echo "Not Available";
-                            } else {
-                                echo $count;
-                            }
+                        if (empty($count)) {
+                            echo "Not Available";
+                        } else {
+                            echo $count;
+                        }
                         ?>
                     </div>
                 </div>
@@ -171,11 +181,11 @@
                     <div class="col-5 pt-2 pb-2">Occupied Houses</div>
                     <div class="col-7 pt-2 pb-2">
                         <?php
-                            if (empty($occupied)) {
-                                echo "Not Available";
-                            } else {
-                                echo $occupied;
-                            }
+                        if (empty($occupied)) {
+                            echo "Not Available";
+                        } else {
+                            echo $occupied;
+                        }
                         ?>
                     </div>
                 </div>
@@ -185,11 +195,11 @@
                     <div class="col-7 pt-2 pb-2">
                         <?php
 
-                            if (empty($empty)) {
-                                echo "Not Available";
-                            } else {
-                                echo $empty;
-                            }
+                        if (empty($empty)) {
+                            echo "Not Available";
+                        } else {
+                            echo $empty;
+                        }
 
                         ?>
                     </div>
@@ -199,11 +209,11 @@
                     <div class="col-5 pt-2 pb-2">Overoll Rent</div>
                     <div class="col-7 pt-2 pb-2">
                         <?php
-                            if (empty($data["numberHouses"])) {
-                                echo "Not Available";
-                            } else {
-                                echo $data["rentalTotal"];
-                            }
+                        if (empty($data["numberHouses"])) {
+                            echo "Not Available";
+                        } else {
+                            echo $data["rentalTotal"];
+                        }
                         ?>
                     </div>
                 </div>
