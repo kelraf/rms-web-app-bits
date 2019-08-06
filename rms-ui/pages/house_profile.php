@@ -37,15 +37,17 @@
         if ($data["houseType"] != "BedSitter") {
             $data["houseType"] = $data["houseType"] . " Bedroom/s";
         }
+
+        $tenant_name = "Not Avalable";
         $apart_id = $data["apartmentId"];
         $query_one = mysqli_query($conn, "SELECT * FROM apartments WHERE id='$apart_id'");
         $apart = mysqli_fetch_array($query_one);
 
         if ($apart) {
-            echo "Success";
+           // echo "Success";
         }
     } else {
-        echo "No Data Available";
+        //echo "No Data Available";
     }
 
     ?>
@@ -81,7 +83,7 @@
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Tenant Name</div>
-                    <div class="col-7 pt-2 pb-2">Kshs 30000</div>
+                    <div class="col-7 pt-2 pb-2"><?= $tenant_name ?></div>
                 </div>
 
                 <div class="row">

@@ -1,12 +1,12 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_SESSION["user_id"])) {
-        $_SESSION["message"] = "Authentication Required Please Login";
-        header("location: login.php");
-    }
+if (!isset($_SESSION["user_id"])) {
+    $_SESSION["message"] = "Authentication Required Please Login";
+    header("location: login.php");
+}
 
-    $user_id = $_SESSION["user_id"];
+$user_id = $_SESSION["user_id"];
 
 ?>
 
@@ -18,11 +18,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add House</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/custom/forms.css">
 </head>
 
 <body class="bg-primary">
+
+    <!-- Back Button -->
+    <a href="apartment_profile.php?id=<?php echo $_GET["apart_id"] ?>" class="back-arrow-btn mb-5">
+        <i class="fa fa-arrow-left fa-2x"></i>
+    </a>
 
     <div class="container-fluid">
         <div class="row">
