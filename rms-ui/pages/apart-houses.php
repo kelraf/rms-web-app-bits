@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["user_id"])) {
+    $_SESSION["message"] = "Authentication Required Please Login";
+    header("location: login.php");
+}
+
+$user_id = $_SESSION["user_id"];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +19,7 @@
     <title>Apartment Houses</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" href="../css/custom/custome-libraries/datatables.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../fontawesome-free-5.9.0-web/css/fontawesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
@@ -49,29 +59,29 @@
 
                     <tbody class="bg-primary" id="table-body">
 
-                        <?php  
-                        
-                            include "../../rms-api/database.php";
-                            $apart_id = $_GET["apart_id"];
-                            $results = mysqli_query($conn, "SELECT * FROM houses WHERE apartmentId='$apart_id'");
-                            
-                            while($row = mysqli_fetch_array($results)) {
-                                if($row["houseType"] != "bedsitter") {
-                                    $num = $row["houseType"];
-                                    $row["houseType"] = $num. " Bedroom"; 
-                                }
-                        ?>
+                        <?php
+
+                        include "../../rms-api/database.php";
+                        $apart_id = $_GET["apart_id"];
+                        $results = mysqli_query($conn, "SELECT * FROM houses WHERE apartmentId='$apart_id'");
+
+                        while ($row = mysqli_fetch_array($results)) {
+                            if ($row["houseType"] != "bedsitter") {
+                                $num = $row["houseType"];
+                                $row["houseType"] = $num . " Bedroom";
+                            }
+                            ?>
 
                             <tr id="table-row" class="g-primary">
-                            <td><?php echo $row["houseType"] ?></td>
-                            <td><?php echo $row["status"] ?></td>
-                            <td><span class="pr-1">Kshs</span><?php echo $row["rent"] ?></td>
-                            <!-- <td><?php echo $row["houseType"] ?></td> -->
-                            <td class="p-0">
-                                <a href="./house_profile.php?house_id=<?php echo $row["id"] ?>" class="btn mt-1 mb-1" id="table-btn">More</a>
-                            </td>
+                                <td><?php echo $row["houseType"] ?></td>
+                                <td><?php echo $row["status"] ?></td>
+                                <td><span class="pr-1">Kshs</span><?php echo $row["rent"] ?></td>
+                                <!-- <td><?php echo $row["houseType"] ?></td> -->
+                                <td class="p-0">
+                                    <a href="./house_profile.php?house_id=<?php echo $row["id"] ?>" class="btn mt-1 mb-1" id="table-btn">More</a>
+                                </td>
 
-                        <?php } ?>
+                            <?php } ?>
                     </tbody>
                 </table>
             </div>

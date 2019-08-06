@@ -1,3 +1,15 @@
+<?php
+    session_start();
+
+    if (!isset($_SESSION["user_id"])) {
+        $_SESSION["message"] = "Authentication Required Please Login";
+        header("location: login.php");
+    }
+
+    $user_id = $_SESSION["user_id"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +29,7 @@
 
 <body class="bg-primary text-white">
     <?php
-    session_start();
+    // session_start();
     if (isset($_SESSION["message"])) {
         echo $_SESSION["message"];
         $_SESSION["message"] = null;
@@ -92,8 +104,8 @@
                                             ?>
                                             <a href="../../rms-api/api/house-api/place_tenant.php?user_id=<?php echo $row["id"] ?>&house_id=<?php echo $house_id ?>"" class=" btn m-1" id="table-btn">Place</a>
                                         <?php } else { ?>
-                                        <a href="houses.php?user_id=<?php echo $row["id"] ?>"" class=" btn m-1" id="table-btn">Place</a>
-                                    <?php
+                                            <a href="houses.php?user_id=<?php echo $row["id"] ?>"" class=" btn m-1" id="table-btn">Place</a>
+                                        <?php
                                         }
                                     }
                                     ?>
