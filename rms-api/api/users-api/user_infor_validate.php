@@ -12,16 +12,15 @@
         public $confirmPassw;
 
         public $role;
-        private $conn;
 
-        public static function idExists($id=null, $conn=null, $data=false) {
+        public static function idExists($id=null, $conn=null, $table=null, $data=false) {
 
             if(empty($id)) {
                 return ["bool" => false, "message" => "Please Provide the user Id"];
             } elseif (empty($conn)) {
                 return ["bool" => false, "message" => "Please Provide Database Connection"];
             } else {
-                $result = mysqli_query($conn, "SELECT * FROM users WHERE id='$id'");
+                $result = mysqli_query($conn, "SELECT * FROM $table WHERE id='$id'");
                 $user = mysqli_fetch_array($result);
                 if($user) {
                     if($data) {
@@ -37,7 +36,7 @@
             
         }
 
-        public static function vEmail($email=null, $conn=null, $checkExists=false, $exeption=false) {
+        public static function vEmail($email=null, $conn=null, $checkExists=false, $exeption=false, $id=null) {
 
             // Sanitize email
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -78,7 +77,7 @@
 
         }
         
-        public static function vPassword($passw=null, $confirmPassw=null, $current=null, $id=null, $compareExisting=false) {
+        public static function vPassword($passw=null, $confirmPassw=null, $conn=null, $current=null, $id=null, $compareExisting=false) {
             if(empty($passw)) {
                 return ["bool" => false, "message" => "Password Field Required"];
             } elseif(empty($confirmPassw)) {
@@ -90,19 +89,29 @@
             } else {
                 if($compareExisting) {
 
-                    $data = $this->idExists(true);
-                    if($data["bool"]) {
-                        $user = $data["user"];
-                        
-                        if(!password_verify($this->currentPassw, $user["passw"])) {
-                            return ["bool" => false, "message" => "Current Password is Invalid"];
-                        } else {
-                            $this->passw = password_hash($this->passw, PASSWORD_DEFAULT);
-                            $this->confirmPassw = password_hash($this->confirmPassw, PASSWORD_DEFAULT);
-                            return ["bool" => true];
-                        }
+                    if(empty($current)) {
+                        return ["bool" => false, "message" => "Current Password Field Required"];
+                    } elseif (empty($id)) {
+                        return ["bool" => false, "message" => "id Field Required"];
                     } else {
-                        return $data;
+                        
+                        $data = self::idExists($id, $conn, "users", true);
+                        if($data["bool"]) {
+                            $user = $data["data"];
+                            
+                            if(!password_verify($current, $user["passw"])) {
+                                return ["bool" => false, "message" => "Current Password is Invalid"];
+                            } else {
+
+                                $passwords = [];
+                                $passwords["passw"] = password_hash($passw, PASSWORD_DEFAULT);
+                                $passwords["confirmPassw"] = password_hash($confirmPassw, PASSWORD_DEFAULT);
+                                return ["bool" => true, "passwords" => $passwords];
+
+                            }
+                        } else {
+                            return $data;
+                        }
                     }
 
                 } else {

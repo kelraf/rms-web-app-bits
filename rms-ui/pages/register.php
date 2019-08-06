@@ -24,7 +24,7 @@
 
                     <?php 
                         session_start();
-                        if($_SESSION["message"]) {
+                        if(isset($_SESSION["message"])) {
 
                         ?>
                         <div class="flash-error">

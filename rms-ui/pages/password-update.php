@@ -1,12 +1,12 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_SESSION["user_id"])) {
-        $_SESSION["message"] = "Authentication Required Please Login";
-        header("location: login.php");
-    }
+if (!isset($_SESSION["user_id"])) {
+    $_SESSION["message"] = "Authentication Required Please Login";
+    header("location: login.php");
+}
 
-    $user_id = $_SESSION["user_id"];
+$user_id = $_SESSION["user_id"];
 
 ?>
 
@@ -32,13 +32,36 @@
 
     <div class="container">
         <div class="row">
+            <div class="col-12 pt-2">
+
+                <?php
+                if (isset($_SESSION["message"])) {
+
+                    ?>
+                    <div class="flash-error">
+                        <?php
+                        echo $_SESSION["message"];
+                        $_SESSION["message"] = null;
+                        ?>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
             <div class="col-12 bg-primary">
-                <form action="../../rms-api/api/users-api/password-update.php?user_id=<?php echo $_GET["user_id"] ?>" method="post" class="register">
+                <form action="../../rms-api/api/users-api/password-update.php" method="post" class="register">
 
                     <div class="reg-header">
                         <h4>Update Password</h4>
                     </div>
 
+                    <div class="form-group">
+                        <label for="current">Current Password</label>
+                        <input type="password" class="form-control" placeholder="Your Current Password" name="current">
+                    </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" placeholder="Confirm Your Password" name="confirm_password">
