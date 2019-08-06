@@ -10,8 +10,7 @@
     $user = mysqli_fetch_array($result);
 
     if($user) {
-        
-        if($user["passw"] != $passw) {
+        if(!password_verify($passw, $user["passw"])) {
             $_SESSION["message"] = "Invalid Password";
             header("Location: ../../../rms-ui/pages/login.php");
         } else {
