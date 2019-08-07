@@ -1,12 +1,12 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_SESSION["user_id"])) {
-        $_SESSION["message"] = "Authentication Required Please Login";
-        header("location: login.php");
-    }
+if (!isset($_SESSION["user_id"])) {
+    $_SESSION["message"] = "Authentication Required Please Login";
+    header("location: login.php");
+}
 
-    $user_id = $_SESSION["user_id"];
+$user_id = $_SESSION["user_id"];
 
 ?>
 
@@ -40,7 +40,24 @@
         <i class="fa fa-arrow-left fa-2x"></i>
     </a>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-12 pt-2">
 
+                <?php
+                if (isset($_SESSION["message"])) {
+
+                    ?>
+                    <div class="flash-error">
+                        <?php
+                        echo $_SESSION["message"];
+                        $_SESSION["message"] = null;
+                        ?>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -84,7 +101,7 @@
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" value="<?php echo $user["email"] ?>" placeholder="Enter Your Email" name="email">
+                        <input type="text" class="form-control" value="<?php echo $user["email"] ?>" placeholder="Enter Your Email" name="email">
                     </div>
 
                     <div class="form-group">

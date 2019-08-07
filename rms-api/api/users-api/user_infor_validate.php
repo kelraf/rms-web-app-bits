@@ -16,7 +16,7 @@
         public static function idExists($id=null, $conn=null, $table=null, $data=false) {
 
             if(empty($id)) {
-                return ["bool" => false, "message" => "Please Provide the user Id"];
+                return ["bool" => false, "message" => "Oparation Impossible Id Required"];
             } elseif (empty($conn)) {
                 return ["bool" => false, "message" => "Please Provide Database Connection"];
             } else {
@@ -36,7 +36,7 @@
             
         }
 
-        public static function vEmail($email=null, $conn=null, $checkExists=false, $exeption=false, $id=null) {
+        public static function vEmail($email=null, $conn=null, $checkExists=false, $exeption=false, $id=null, $table = "users") {
 
             // Sanitize email
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -49,7 +49,7 @@
                     if($conn) {
 
                         if($exeption) {
-                            $result = mysqli_query($conn, "SELECT * FROM users WHERE email !='$email'");
+                            $result = mysqli_query($conn, "SELECT * FROM $table WHERE id != '$id' AND email = '$email'");
                             $user = mysqli_fetch_array($result);
                             if($user) {
                                 return ["bool" => true, "exists" => true, "message" => "Email already exists"];
@@ -57,7 +57,7 @@
                                 return ["bool" => true, "exists" => false, "message" => "No User With Such email"];
                             }
                         } else {
-                            $result = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
+                            $result = mysqli_query($conn, "SELECT * FROM $table WHERE email='$email'");
                             $user = mysqli_fetch_array($result);
                             if($user) {
                                 return ["bool" => true, "exists" => true, "message" => "Email already exists"];
@@ -125,20 +125,51 @@
             }
         }
 
-        public static function vNames($firstName, $lastName) {
-            // Sanitize The Names
-            $firstName = filter_var($firstName, FILTER_SANITIZE_STRING);
-            $lastName = filter_var($lastName, FILTER_SANITIZE_STRING);
+        public static function validate($firstName=null, $lastName=null, $phoneNo=null, $email=null, $conn = null, $onUpdate = false , $id=null, $table) {
 
-            if(empty($firstName)) {
-                return ["bool" => false, "message" => "First Name Field is required"];
-            } elseif(empty($lastName)) {
-                return ["bool" => false, "message" => "Last Name Field is required"];
-            } elseif(strlen($firstName) < 2 or strlen($lastName) < 2) {
-                return ["bool" => false, "message" => "Names Should Not Be Too Short"];
+            if($onUpdate) {
+                $vid = self::idExists($id, $conn, $table);
+
+                if(!$vid["bool"]) {
+                    return $vid;
+                } else {
+                    $vmail = self::vEmail($email, $conn, true, true, $id, $table);
+
+                    if($vmail["bool"] and $vmail["exists"]) {
+                        return ["bool" => false, "message" => $vmail["message"]];
+                    } elseif (!$vmail["bool"]) {
+                        return $vmail;
+                    } else {
+                        return ["bool" => true];
+                    }
+                }
             } else {
-                return ["bool" => true];
+
+                if(empty($firstName)) {
+                    return ["bool" => false, "message" => "First Name Field is required"];
+                } elseif(empty($lastName)) {
+                    return ["bool" => false, "message" => "Last Name Field is required"];
+                } elseif(strlen($firstName) < 2 or strlen($lastName) < 2) {
+                    return ["bool" => false, "message" => "Names Should Not Be Too Short"];
+                } elseif (empty($phoneNo)) {
+                    return ["bool" => false, "message" => "Phone Number Field is required"];
+                } elseif (strLen($phoneNo) < 10) {
+                    return ["bool" => false, "message" => "Invalid Phone Number"];
+                } elseif (empty($email)) {
+                    return ["bool" => false, "message" => "Email Required"];
+                } else {
+                    $valid_mail = self::vEmail($email, $conn, true, false, null, "tenants");
+
+                    if($valid_mail["bool"] and $valid_mail["exists"]) {
+                        return ["bool" => false, "message" => $valid_mail["message"]];
+                    } else {
+                        return ["bool" => true];
+                    }
+                    
+                }
             }
+
+            
         }
 
     } 
