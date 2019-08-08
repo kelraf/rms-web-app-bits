@@ -36,21 +36,26 @@
     if ($data) {
 
         $query_two = mysqli_query($conn, "SELECT * FROM houses WHERE apartmentId='$apart_id'");
+
         $occupied = 0;
         $empty = 0;
         $count = 0;
+        $rent = 0;
 
         if ($query_two) {
             while ($house = mysqli_fetch_array($query_two)) {
 
-                if ($house["status"] == "notOccupie") {
+                if ($house["status"] == "notOccupied") {
                     $empty++;
                     $count++;
+                    if($house["rent"]) {
+                        $rent += $house["rent"];
+                    }
                 } else {
                     $occupied++;
                     $count++;
                 }
-            }
+            } 
         } else {
             echo "Data Not available";
         }
@@ -207,21 +212,17 @@
 
                 <div class="row">
                     <div class="col-5 pt-2 pb-2">Overoll Rent</div>
-                    <div class="col-7 pt-2 pb-2">
+                    <div class="col-7 pt-2 pb-2"> <span>Kshs</span>
                         <?php
-                        if (empty($data["numberHouses"])) {
-                            echo "Not Available";
-                        } else {
-                            echo $data["rentalTotal"];
-                        }
+                            echo $rent;
                         ?>
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-5 pt-2 pb-2">Outstanding Payment</div>
                     <div class="col-7 pt-2 pb-2">Kshs 10000</div>
-                </div>
+                </div> -->
 
             </div>
         </div>
@@ -238,6 +239,12 @@
     <script src="../js/custom/custom-libraries/chart.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/custom/apartment-profile.js"></script>
+
+    <script>
+        let occupied = "<?php echo $occupied ?>"
+        let empty = "<?php echo $empty ?>"
+    </script>
+
 </body>
 
 </html>

@@ -55,8 +55,8 @@ function apartmentsProfile() {
             labelTwo: "Empty Houses",
         },
         data: {
-            firstData: 10,
-            secondData: 20
+            firstData: occupied,
+            secondData: empty
         }
     }
 

@@ -197,7 +197,6 @@
                         </div>
 
                     </a>
-
                     <a class="nav-link p-0" id="v-pills-houses-tab" data-toggle="pill" href="#v-pills-houses" role="tab" aria-controls="v-pills-houses" aria-selected="false">
 
                         <div class="container-fluid pt-2 pb-1" id="houses">
