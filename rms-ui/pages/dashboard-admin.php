@@ -1,6 +1,5 @@
 <?php
     session_start();
-
     if (!isset($_SESSION["user_id"])) {
         $_SESSION["message"] = "Authentication Required Please Login";
         header("location: login.php");
@@ -30,7 +29,6 @@
     <?php
 
     include "../../rms-api/database.php";
-    session_start();
     $user_id = $_SESSION["user_id"];
 
     $query = mysqli_query($conn, "SELECT * FROM apartments");
