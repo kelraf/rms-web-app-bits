@@ -15,8 +15,8 @@ ___
 * Open Xxamp and start MySQL database and apache servers.
 * Open the system from the local server using your browser.
 
-## Find Database in
-  ## __On The Root Folder__
+## Find Database on
+  __The Root Folder__
 
 ## How It Works
 
