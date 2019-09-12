@@ -1,0 +1,63 @@
+body {
+    color: white;
+    position: relative;
+}
+
+.back-arrow-btn {
+    /* background: red; */
+    position: relative;
+    display: inline-block;
+    width: 50px !important;
+    height: 50px !important;
+    top: 5px;
+    left: 5px;
+    padding-top: 9px;
+    padding-left: 9px;
+    text-decoration: none;
+    color: white;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.main-cont {
+    margin-top: 100px;
+    border: 1px solid white;
+}
+
+.edit-btn {
+    /* background-color: red; */
+    width: 70%;
+    margin: auto
+}
+
+.edit-btn a {
+    width: 100%;
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 0;
+    color: white;
+    /* margin: auto; */
+}
+
+.house-image {
+    width: 100%;
+    background: red;
+    height: 200px;
+    border: 1px solid white;
+    background: inherit;
+    text-align: center;
+}
+
+.house-icon {
+    /* background: gray; */
+    width: 50%;
+    text-align: center;
+    position: relative;
+    bottom: -77px;
+    border: 1px solid white;
+    margin: auto;
+}
+
+.house-icon i {
+    /* border: 1px solid white; */
+}
